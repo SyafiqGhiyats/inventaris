@@ -49,23 +49,28 @@ class Pembelian extends Render_Controller
                 redirect('pembelian', 'refresh');
             }
         } else {
-            $this->db->select('stok');
-            $barang = $this->db->get_where('barang', ['kode_barang' => $data['kode_barang']])->row_array();
-            $this->db->set('kepala_gudang2', $this->session->userdata('nip'));
-            $this->db->set('kepala_gudang2_status', 'accepted');
-            $this->db->where('id_pembelian_detail', $id);
-            $query = $this->db->update('pembelian_detail');
-            if ($data['manajer_status'] == 'accepted') {
-                $this->db->set('stok', ((int) $barang['stok'] + $data['jumlah']));
-                $this->db->where('kode_barang', $data['kode_barang']);
-                $stok = $this->db->update('barang');
-                $this->db->set('status', 'accepted');
-                $this->db->where('id_pembelian', $id);
-                $status = $this->db->update('pembelian');
-            }
-            if ($query) {
-                echo "<script>alert('Permintaan telah diterima')</script>";
+            if (empty($data['manajer_status'])) {
+                echo "<script>alert('Harap menunggu konfirmasi dari manajer terlebih dahulu')</script>";
                 redirect('pembelian', 'refresh');
+            } else {
+                $this->db->select('stok');
+                $barang = $this->db->get_where('barang', ['kode_barang' => $data['kode_barang']])->row_array();
+                $this->db->set('kepala_gudang2', $this->session->userdata('nip'));
+                $this->db->set('kepala_gudang2_status', 'accepted');
+                $this->db->where('id_pembelian_detail', $id);
+                $query = $this->db->update('pembelian_detail');
+                if ($data['manajer_status'] == 'accepted') {
+                    $this->db->set('stok', ((int) $barang['stok'] + $data['jumlah']));
+                    $this->db->where('kode_barang', $data['kode_barang']);
+                    $stok = $this->db->update('barang');
+                    $this->db->set('status', 'accepted');
+                    $this->db->where('id_pembelian', $id);
+                    $status = $this->db->update('pembelian');
+                }
+                if ($query) {
+                    echo "<script>alert('Permintaan telah diterima')</script>";
+                    redirect('pembelian', 'refresh');
+                }
             }
         }
 
@@ -79,14 +84,17 @@ class Pembelian extends Render_Controller
         $this->db->select('kepala_gudang_status,manajer_status');
         $data = $this->db->get_where('pembelian_detail', ['id_pembelian_detail' => $id])->row_array();
         if ($data['kepala_gudang_status'] != 'Pending..') {
-            $this->db->set('kepala_gudang2', $this->session->userdata('nip'));
-            $this->db->set('kepala_gudang2_status', 'rejected');
-            $this->db->where('id_pembelian_detail', $id);
-            $query = $this->db->update('pembelian_detail');
-            if (isset($data['manajer_status'])) {
+            if ($data['manajer_status'] != 'Pending..') {
+                $this->db->set('kepala_gudang2', $this->session->userdata('nip'));
+                $this->db->set('kepala_gudang2_status', 'rejected');
+                $this->db->where('id_pembelian_detail', $id);
+                $query = $this->db->update('pembelian_detail');
                 $this->db->set('status', 'rejected');
                 $this->db->where('id_pembelian', $id);
                 $status = $this->db->update('pembelian');;
+            } else {
+                echo "<script>alert('Harap menunggu konfirmasi Manager')</script>";
+                redirect('pembelian', 'refresh');
             }
         } else {
             $this->db->set('kepala_gudang', $this->session->userdata('nip'));
