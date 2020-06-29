@@ -32,7 +32,7 @@ class Peminjaman extends Render_Controller
         $this->plugins = [];
         $this->data['dataID'] = $this->model->getById($id);
         $this->data['barang'] = $this->db->get_where('barang', ['stok' > 0])->result_array();
-        $this->content = 'peminjaman_ubah';
+        $this->content = 'peminjaman-ubah';
         $this->render();
     }
     public function accept_gudang($id)
@@ -131,11 +131,7 @@ class Peminjaman extends Render_Controller
             'kepala_gudang_status' => 'Pending..',
             'manajer_status' => 'Pending..'
         ];
-        $data_update = [
-            'keterangan' => $keterangan,
-            'jumlah' => $jumlah,
-            'barang' => $barang
-        ];
+
         if (empty($id)) {
             $query = $this->model->insert($data_pinjam, $data_detail);
             if ($query) {
@@ -143,7 +139,7 @@ class Peminjaman extends Render_Controller
                 redirect('peminjaman', 'refresh');
             }
         } else {
-            $query = $this->model->update($id, $data_update);
+            $query = $this->model->update($id);
             if ($query) {
                 echo "<script>alert('Berhasil Diubah')</script>";
                 redirect('peminjaman', 'refresh');

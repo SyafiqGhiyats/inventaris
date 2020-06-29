@@ -29,15 +29,24 @@ class PeminjamanModel extends CI_Model
         $this->db->insert('peminjaman_detail', $data_detail);
         return $id;
     }
-    public function update($id, $data)
+    public function update($id)
     {
-        $query = $this->db->set('peminjaman.keterangan', $data['keterangan']);
-        $query = $this->db->set('peminjaman_detail.kode_barang', $data['barang']);
-        $query = $this->db->set('peminjaman_detail.jumlah', $data['jumlah']);
+        $keterangan = $this->input->post('keterangan', true);
+        $jumlah = $this->input->post('jumlah', true);
+        $barang = $this->input->post('barang', true);
 
-        $query = $this->db->where('peminjaman.id_peminjaman', $id);
-        $query = $this->db->where('peminjaman_detail.id_peminjaman', $id);
-        $query = $this->db->update('peminjaman JOIN peminjaman_detail ON peminjaman_detail.id_peminjaman= peminjaman.id_peminjaman');
+        $data_detail = [
+            'jumlah' => $jumlah,
+            'kode_barang' => $barang
+        ];
+        $data_peminjaman = [
+            'keterangan' => $keterangan,
+        ];
+
+        $query = $this->db->where('id_peminjaman', $id);
+        $query = $this->db->update('peminjaman_detail', $data_detail);
+        $query = $this->db->where('id_peminjaman', $id);
+        $query = $this->db->update('peminjaman', $data_peminjaman);
 
         return $query;
     }
