@@ -30,7 +30,8 @@ class Login extends Render_Controller
 				$data = [
 					'status' => true,
 					'id_level' => $login['id_level'],
-					'nama' => $login['nama']
+					'nama' => $login['nama'],
+					'nip' => $login['nip']
 				];
 				$this->session->set_userdata($data);
 				redirect('', 'refresh');

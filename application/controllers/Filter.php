@@ -1,19 +1,21 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Filter extends CI_Controller {
+class Filter extends CI_Controller
+{
 
-	public function getGrafik(){
+	public function getGrafik()
+	{
 		$getPenjualanTanggal = $this->db->group_by('penj_tanggal')->get('penjualan')->result_array();
 
 		$tampung = array();
 		foreach ($getPenjualanTanggal as $q) {
 			// var_dump($q['penj_tanggal']);
 			// exit();
-			$get_a = $this->db->select('COUNT(a.pede_kelas) as jumlah')->join('penjualan b','b.penj_id = a.pede_penj_id')->where('b.penj_tanggal', $q['penj_tanggal'])->where('a.pede_kelas', 1)->get('penjualan_detail a')->row_array();
-			$get_b = $this->db->select('COUNT(a.pede_kelas) as jumlah')->join('penjualan b','b.penj_id = a.pede_penj_id')->where('b.penj_tanggal', $q['penj_tanggal'])->where('a.pede_kelas', 2)->get('penjualan_detail a')->row_array();
-			$get_c = $this->db->select('COUNT(a.pede_kelas) as jumlah')->join('penjualan b','b.penj_id = a.pede_penj_id')->where('b.penj_tanggal', $q['penj_tanggal'])->where('a.pede_kelas', 3)->get('penjualan_detail a')->row_array();
-			$get_d = $this->db->select('COUNT(a.pede_kelas) as jumlah')->join('penjualan b','b.penj_id = a.pede_penj_id')->where('b.penj_tanggal', $q['penj_tanggal'])->where('a.pede_kelas', 4)->get('penjualan_detail a')->row_array();
+			$get_a = $this->db->select('COUNT(a.pede_kelas) as jumlah')->join('penjualan b', 'b.penj_id = a.pede_penj_id')->where('b.penj_tanggal', $q['penj_tanggal'])->where('a.pede_kelas', 1)->get('penjualan_detail a')->row_array();
+			$get_b = $this->db->select('COUNT(a.pede_kelas) as jumlah')->join('penjualan b', 'b.penj_id = a.pede_penj_id')->where('b.penj_tanggal', $q['penj_tanggal'])->where('a.pede_kelas', 2)->get('penjualan_detail a')->row_array();
+			$get_c = $this->db->select('COUNT(a.pede_kelas) as jumlah')->join('penjualan b', 'b.penj_id = a.pede_penj_id')->where('b.penj_tanggal', $q['penj_tanggal'])->where('a.pede_kelas', 3)->get('penjualan_detail a')->row_array();
+			$get_d = $this->db->select('COUNT(a.pede_kelas) as jumlah')->join('penjualan b', 'b.penj_id = a.pede_penj_id')->where('b.penj_tanggal', $q['penj_tanggal'])->where('a.pede_kelas', 4)->get('penjualan_detail a')->row_array();
 
 			// var_dump($get_a);
 			// exit();
@@ -29,100 +31,110 @@ class Filter extends CI_Controller {
 		$this->output->set_output(json_encode($tampung));
 	}
 
-	public function getValuePengaturanMenuParent(){
-		$get = $this->db->select('menu_id,menu_name')->order_by('menu_index','asc')->where('menu_menu_id',0)->get('menu')->result_array();
-		$this->output->set_content_type('application/json');
-		$this->output->set_output(json_encode($get));
-	}	
-		
-	public function getValuePengaturanPenggunaLevel(){
-		$get = $this->db->select('lev_id,lev_nama')->order_by('lev_id','asc')->get('levels')->result_array();
+	public function getValuePengaturanMenuParent()
+	{
+		$get = $this->db->select('menu_id,menu_name')->order_by('menu_index', 'asc')->where('menu_menu_id', 0)->get('menu')->result_array();
 		$this->output->set_content_type('application/json');
 		$this->output->set_output(json_encode($get));
 	}
 
-	public function getValueReferensiConfigItems(){
+	public function getValuePengaturanPenggunaLevel()
+	{
+		$get = $this->db->select('lev_id,lev_nama')->order_by('lev_id', 'asc')->get('levels')->result_array();
+		$this->output->set_content_type('application/json');
+		$this->output->set_output(json_encode($get));
+	}
+
+	public function getValueReferensiConfigItems()
+	{
 		$coni_id = $this->input->post('coni_id');
 		$cats_id = $this->input->post('cats_id'); // default
 		$get = $this->db->select('coni_id,coni_name')
-										->order_by('coni_id','asc')
-										->where('coni_cats_id',$cats_id)
-										->where('coni_coni_id',$coni_id)
-										->get('config_items')->result_array();
+			->order_by('coni_id', 'asc')
+			->where('coni_cats_id', $cats_id)
+			->where('coni_coni_id', $coni_id)
+			->get('config_items')->result_array();
 		$this->output->set_content_type('application/json');
 		$this->output->set_output(json_encode($get));
 	}
 
 
-	public function getValueMenu(){
+	public function getValueMenu()
+	{
 		$get = $this->db->select('*')
-				->where('menu_menu_id',0)
-				->get('menu a')->result_array();
+			->where('menu_menu_id', 0)
+			->get('menu a')->result_array();
 		$this->output->set_content_type('application/json');
-		$this->output->set_output(json_encode($get));	
+		$this->output->set_output(json_encode($get));
 	}
 
-	public function getValueLevel(){
+	public function getValueLevel()
+	{
 		$get = $this->db->select('*')->get('levels a')->result_array();
 		$this->output->set_content_type('application/json');
-		$this->output->set_output(json_encode($get));	
+		$this->output->set_output(json_encode($get));
 	}
 
-	public function getValueKategori(){
+	public function getValueKategori()
+	{
 		$get = $this->db->select('*')
-										->get('kategori a')->result_array();
+			->get('kategori a')->result_array();
 		$this->output->set_content_type('application/json');
-		$this->output->set_output(json_encode($get));	
+		$this->output->set_output(json_encode($get));
 	}
-	public function getValueKategoriWhere(){
+	public function getValueKategoriWhere()
+	{
 		$kate_id = $this->input->post('kate_id');
 		$level = $this->input->post('levels');
 
-		if($level > 1){
+		if ($level > 1) {
 			$where = array(
 				'kate_kate_id' => $kate_id,
-				'kate_levels' => $level 
+				'kate_levels' => $level
 			);
-		}else{
+		} else {
 			$where = array(
 				'kate_levels' => $level
 			);
 		}
 
 		$get = $this->db->select('*')
-						->get_where('kategori a', $where)
-						->result_array();
+			->get_where('kategori a', $where)
+			->result_array();
 		$this->output->set_content_type('application/json');
-		$this->output->set_output(json_encode($get));	
+		$this->output->set_output(json_encode($get));
 	}
-	public function getValueSupplier(){
+	public function getValueSupplier()
+	{
 		$vendor = $this->input->post('vendor');
-		if($vendor != null){
+		if ($vendor != null) {
 			$get = $this->db->select('*')
-										->where('supp_nama',$vendor)
-										->get('supplier a')->row_array();
-		}else{
+				->where('supp_nama', $vendor)
+				->get('supplier a')->row_array();
+		} else {
 			$get = $this->db->select('*')
-										->get('supplier a')->result_array();
+				->get('supplier a')->result_array();
 		}
 		$this->output->set_content_type('application/json');
-		$this->output->set_output(json_encode($get));	
+		$this->output->set_output(json_encode($get));
 	}
 
-	public function getValueBarang(){
+	public function getValueBarang()
+	{
 		$get = $this->db->select('*')
-										->get('barang a')->result_array();
+			->get('barang a')->result_array();
 		$this->output->set_content_type('application/json');
-		$this->output->set_output(json_encode($get));	
+		$this->output->set_output(json_encode($get));
 	}
 
-	public function getValueSubMenu(){
+	public function getValueSubMenu()
+	{
 		$menu_id = $this->input->post('menu_id');
 		$get = $this->db->select('*')
-										->where('menu_menu_id',$menu_id)
-										->get('menu a')->result_array();
+			->where('menu_menu_id', $menu_id)
+			->get('menu a')->result_array();
 		$this->output->set_content_type('application/json');
-		$this->output->set_output(json_encode($get));	
+		$this->output->set_output(json_encode($get));
 	}
 
 	public function getValueRak()
@@ -141,7 +153,7 @@ class Filter extends CI_Controller {
 		$this->output->set_output(json_encode($get));
 	}
 
-	
+
 	public function getValueKelasWhere()
 	{
 		$kelas = $this->input->post('kelas');
@@ -170,9 +182,9 @@ class Filter extends CI_Controller {
 	public function getValueWitel()
 	{
 		$regi_id 	= $this->input->post('regi_id');
-		if($regi_id != null){
+		if ($regi_id != null) {
 			$array = array('wite_regi_id' => $regi_id);
-		}else{
+		} else {
 			$array = array();
 		}
 		$exe 		= $this->db->get_where('witel', $array)->result_array();
@@ -213,27 +225,27 @@ class Filter extends CI_Controller {
 		$kate_id_3 = $this->input->post('kate_id_3');
 		$prod_id = $this->input->post('prod_id');
 		$prod_kode = $this->input->post('prod_kode');
-		if($kate_id != null){
+		if ($kate_id != null) {
 			$where = array(
 				'prod_kate_id' => $kate_id
 			);
-		}elseif($kate_id_2 != null){
+		} elseif ($kate_id_2 != null) {
 			$where = array(
 				'prod_kate_id_2' => $kate_id_2
 			);
-		}elseif($kate_id_3 != null){
+		} elseif ($kate_id_3 != null) {
 			$where = array(
 				'prod_kate_id_3' => $kate_id_3
 			);
-		}elseif($prod_id != null){
+		} elseif ($prod_id != null) {
 			$where = array(
 				'prod_id' => $prod_id
 			);
-		}elseif($prod_kode != null){
+		} elseif ($prod_kode != null) {
 			$where = array(
 				'prod_kode' => $prod_kode
 			);
-		}else{
+		} else {
 			$where = array();
 		}
 		$exe 		= $this->db->select('*')->get_where('products', $where)->result_array();
@@ -245,9 +257,9 @@ class Filter extends CI_Controller {
 	public function getValueProdukPenjualan()
 	{
 		$kelas = $this->input->post('kelas');
-		if($kelas != null){
+		if ($kelas != null) {
 			$where = array('prod_kela_id' => $kelas, 'prod_status' => 'Tersedia');
-		}else{
+		} else {
 			$where = array('prod_status' => 'Tersedia');
 		}
 		$exe 		= $this->db->get_where('produk', $where)->result_array();
@@ -255,7 +267,7 @@ class Filter extends CI_Controller {
 		$this->output->set_content_type('application/json');
 		$this->output->set_output(json_encode($exe));
 	}
-	
+
 	public function getDriver()
 	{
 		$exe 		= $this->db->get_where('driver', array('driv_status' => 'Aktif'))->result_array();
@@ -296,10 +308,9 @@ class Filter extends CI_Controller {
 		$exe 		= $this->db->get_where('produk', array('prod_ruma_id' => $lokal))->num_rows();
 
 		$return['jumlah'] = $exe;
-		$return['blok'] = $this->db->select('b.blok_nama,b.blok_id')->join('blok b','b.blok_id = a.ruma_blok_id')->where('a.ruma_nama',$lokal)->get('rumah a')->row_array();
+		$return['blok'] = $this->db->select('b.blok_nama,b.blok_id')->join('blok b', 'b.blok_id = a.ruma_blok_id')->where('a.ruma_nama', $lokal)->get('rumah a')->row_array();
 
 		$this->output->set_content_type('application/json');
 		$this->output->set_output(json_encode($return));
 	}
-	
-}	
+}
