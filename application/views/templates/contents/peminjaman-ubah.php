@@ -56,7 +56,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <form role="form" action="<?= base_url('peminjaman/save'); ?>" id="form" method="post">
-                                    <input type="hidden" name="id" value="">
+                                    <input type="hidden" name="id" value="<?= $dataID['id_peminjaman']; ?>">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
