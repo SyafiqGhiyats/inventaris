@@ -8,8 +8,8 @@ class Setting
 	public function index()
 	{
 		$return = array(
-			'app_title' => 'Sistem Inventaris',
-			'app_name'	=> 'Sistem Inventaris'
+			'app_title' => 'Engineering Inventory',
+			'app_name'	=> 'Engineering Inventory'
 		);
 		return $return;
 	}

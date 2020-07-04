@@ -59,41 +59,47 @@
                                 <div id="tableTools"></div>
                             </div>
                             <div class="col-md-6">
-                                <button id="clickTambah" style="float: right;" class="btn btn-ef btn-ef-5 btn-ef-5b btn-success mb-10" data-toggle="modal" data-target="#splash" data-options="splash-2 splash-ef-14"><i class="fa fa-plus"></i> <span>Tambah</span></button>
+                                <?php if (isset($data)) : ?>
+
+                                <?php else : ?>
+                                    <button id="clickTambah" style="float: right;" class="btn btn-ef btn-ef-5 btn-ef-5b btn-success mb-10" data-toggle="modal" data-target="#splash" data-options="splash-2 splash-ef-14"><i class="fa fa-plus"></i> <span>Tambah</span></button>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <br>
-                        <table class="table table-custom" id="advanced-usage">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>ID Gudang</th>
-                                    <th>Nama</th>
-                                    <th>Tanggal</th>
-                                    <th style="text-align: right;">Pilihan &nbsp;&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <?php $no = 1;
-                            foreach ($data as $d) : ?>
-                                <tbody>
+                        <div class="table-responsive">
+                            <table class="table table-custom" id="advanced-usage">
+                                <thead>
                                     <tr>
-                                        <td><?= $no; ?></td>
-                                        <td><?= $d['id_gudang']; ?></td>
-                                        <td><?= $d['nama']; ?></td>
-                                        <td><?= $d['tanggal']; ?></td>
-                                        <td>
-                                            <div class="pull-right">
-                                                <a href="<?= base_url('rak/ubah/') . $d['id_rak'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-edit"></i> <span>Ubah</span></a>
-                                                <a href="<?= base_url('rak/hapus/') . $d['id_rak'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button" value="'+data+'"><i class="fa fa-trash"></i> <span>Hapus</span></a>
-                                            </div>
-                                        </td>
-
+                                        <th>No</th>
+                                        <th>Nama gudang</th>
+                                        <th>Nama</th>
+                                        <th>Tanggal</th>
+                                        <th style="text-align: right;">Pilihan &nbsp;&nbsp;</th>
                                     </tr>
-                                </tbody>
+                                </thead>
+                                <?php $no = 1;
+                                foreach ($data as $d) : ?>
+                                    <tbody>
+                                        <tr>
+                                            <td><?= $no; ?></td>
+                                            <td><?= $d['id_gudang']; ?></td>
+                                            <td><?= $d['nama']; ?></td>
+                                            <td><?= $d['tanggal']; ?></td>
+                                            <td>
+                                                <div class="pull-right">
+                                                    <a href="<?= base_url('rak/ubah/') . $d['id_rak'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-edit"></i> <span>Ubah</span></a>
 
-                            <?php $no++;
-                            endforeach; ?>
-                        </table>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+
+                                <?php $no++;
+                                endforeach; ?>
+                            </table>
+                        </div>
                     </div>
                     <!-- /tile body -->
 

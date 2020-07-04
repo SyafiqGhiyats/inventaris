@@ -11,10 +11,15 @@ class Login extends Render_Controller
 		if ($this->session->userdata('status') == true) {
 			redirect('dashboard', 'refresh');
 		}
-		// Page Settings
-		$this->title = 'Login';
-		$this->navigation = [];
-		$this->render();
+		$this->form_validation->set_rules('nip', 'NIP', 'required|numeric|min_length[9]');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		if ($this->form_validation->run() == false) {
+			$this->title = 'Login';
+			$this->navigation = [];
+			$this->render();
+		} else {
+			$this->doLogin();
+		}
 	}
 
 	public function doLogin()
@@ -58,7 +63,7 @@ class Login extends Render_Controller
 		$this->load->model('loginModel', 'model');
 		$this->load->library('plugin');
 		$this->load->helper('url');
-
+		$this->load->library('form_validation');
 		$this->load->library('b_password');
 	}
 }

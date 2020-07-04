@@ -187,7 +187,7 @@
 
 
 				<!-- Right-side navigation -->
-				<ul class="nav-right pull-right list-inline">
+				<!-- <ul class="nav-right pull-right list-inline">
 
 
 					<li class="dropdown nav-profile">
@@ -208,7 +208,7 @@
 						</ul>
 
 					</li>
-				</ul>
+				</ul> -->
 				<!-- Right-side navigation end -->
 
 

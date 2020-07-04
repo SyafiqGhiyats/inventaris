@@ -5,7 +5,7 @@ class PeminjamanModel extends CI_Model
 {
     public function getById($id)
     {
-        $this->db->select('keterangan,kode_barang,jumlah,peminjaman.id_peminjaman');
+        $this->db->select('keterangan,kode_barang,jumlah,peminjaman.id_peminjaman,status');
         $this->db->from('peminjaman');
         $this->db->join('peminjaman_detail', 'peminjaman_detail.id_peminjaman = peminjaman.id_peminjaman');
         $this->db->where('peminjaman.id_peminjaman', $id);

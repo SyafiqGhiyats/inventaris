@@ -63,57 +63,55 @@
                             </div>
                         </div>
                         <br>
-                        <div class="table-responsive">
-                            <table class="table table-custom table-responsive" id="advanced-usage">
-                                <thead>
+                        <table class="table table-custom table-responsive" id="advanced-usage">
+                            <thead>
+                                <tr>
+                                    <th>NIP</th>
+                                    <th>Kode Barang</th>
+                                    <th>Keterangan</th>
+                                    <th>Status</th>
+                                    <th>Jumlah</th>
+                                    <th>Total Harga</th>
+                                    <th>Kep.Gudang</th>
+                                    <th>Kep.Gudang Status</th>
+                                    <th>Manajer</th>
+                                    <th>Manajer Status</th>
+                                    <th>Kep.Gudang2</th>
+                                    <th>Kep.Gudang2 Status</th>
+                                    <th>Tanggal</th>
+                                    <th style="text-align: right;">Pilihan &nbsp;&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <?php $no = 1;
+                            foreach ($data as $d) : ?>
+                                <tbody>
                                     <tr>
-                                        <th>NIP</th>
-                                        <th>Kode Barang</th>
-                                        <th>Keterangan</th>
-                                        <th>Status</th>
-                                        <th>Jumlah</th>
-                                        <th>Total Harga</th>
-                                        <th>Kep.Gudang</th>
-                                        <th>Kep.Gudang Status</th>
-                                        <th>Manajer</th>
-                                        <th>Manajer Status</th>
-                                        <th>Kep.Gudang2</th>
-                                        <th>Kep.Gudang2 Status</th>
-                                        <th>Tanggal</th>
-                                        <th style="text-align: right;">Pilihan &nbsp;&nbsp;</th>
+                                        <td><?= $d['nip']; ?></td>
+                                        <td><?= $d['kode_barang']; ?></td>
+                                        <td><?= $d['keterangan']; ?></td>
+                                        <td><?= $d['status']; ?></td>
+                                        <td><?= $d['jumlah']; ?></td>
+                                        <td><?= $d['total_harga']; ?></td>
+                                        <td><?= $d['kepala_gudang'] == '' ? 'Belum Dikonfirmasi' : $d['kepala_gudang'] ?></td>
+                                        <td><?= $d['kepala_gudang_status']; ?></td>
+                                        <td><?= $d['manajer'] == '' ? 'Belum Dikonfirmasi' : $d['manajer'] ?></td>
+                                        <td><?= $d['manajer_status']; ?></td>
+                                        <td><?= $d['kepala_gudang2'] == '' ? 'Belum Dikonfirmasi' : $d['kepala_gudang2'] ?></td>
+                                        <td><?= $d['kepala_gudang2_status']; ?></td>
+                                        <td><?= $d['tanggal']; ?></td>
+                                        <td>
+                                            <div class="text-center">
+                                                <a href="<?= base_url('pembelian/ubah/') . $d['id_pembelian'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-edit"></i> <span>Ubah</span></a>
+                                                <a href="<?= base_url('pembelian/hapus/') . $d['id_pembelian'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button" value="'+data+'"><i class="fa fa-trash"></i> <span>Hapus</span></a>
+                                            </div>
+                                        </td>
+
                                     </tr>
-                                </thead>
-                                <?php $no = 1;
-                                foreach ($data as $d) : ?>
-                                    <tbody>
-                                        <tr>
-                                            <td><?= $d['nip']; ?></td>
-                                            <td><?= $d['kode_barang']; ?></td>
-                                            <td><?= $d['keterangan']; ?></td>
-                                            <td><?= $d['status']; ?></td>
-                                            <td><?= $d['jumlah']; ?></td>
-                                            <td><?= $d['total_harga']; ?></td>
-                                            <td><?= $d['kepala_gudang'] == '' ? 'Belum Dikonfirmasi' : $d['kepala_gudang'] ?></td>
-                                            <td><?= $d['kepala_gudang_status']; ?></td>
-                                            <td><?= $d['manajer'] == '' ? 'Belum Dikonfirmasi' : $d['manajer'] ?></td>
-                                            <td><?= $d['manajer_status']; ?></td>
-                                            <td><?= $d['kepala_gudang2'] == '' ? 'Belum Dikonfirmasi' : $d['kepala_gudang2'] ?></td>
-                                            <td><?= $d['kepala_gudang2_status']; ?></td>
-                                            <td><?= $d['tanggal']; ?></td>
-                                            <td>
-                                                <div class="text-center">
-                                                    <a href="<?= base_url('pembelian/ubah/') . $d['id_pembelian'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-edit"></i> <span>Ubah</span></a>
-                                                    <a href="<?= base_url('pembelian/hapus/') . $d['id_pembelian'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button" value="'+data+'"><i class="fa fa-trash"></i> <span>Hapus</span></a>
-                                                </div>
-                                            </td>
+                                </tbody>
 
-                                        </tr>
-                                    </tbody>
-
-                                <?php $no++;
-                                endforeach; ?>
-                            </table>
-                        </div>
+                            <?php $no++;
+                            endforeach; ?>
+                        </table>
                     </div>
                     <!-- /tile body -->
 

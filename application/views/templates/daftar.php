@@ -12,7 +12,7 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Sistem Akademik</title>
+    <title>Engineering Inventory | Daftar</title>
     <link rel="icon" type="image/ico" href="<?= base_url() ?>assets/admin/non-angular/assets/images/favicon.ico" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -83,7 +83,7 @@
         <div class="page page-core page-login">
 
             <div class="text-center">
-                <h3 class="text-light text-white"><span class="text-lightred">SISTEM</span>INVENTARIS</h3>
+                <h3 class="text-light text-white"><span class="text-lightred">ENGINEERING</span>INVENTORI</h3>
             </div>
 
             <div class="container w-420 p-15 bg-white mt-40 text-center">
@@ -91,29 +91,25 @@
 
                 <h2 class="text-light text-greensea">Daftar</h2>
 
-                <form name="form" class="form-validation mt-20" novalidate="" action="<?= base_url() ?>daftar/save" method="POST">
+                <form name="form" class="form-validation mt-20" novalidate="" action="<?= base_url() ?>daftar/" method="POST">
 
                     <div class="form-group">
                         <input type="text" class="form-control underline-input" placeholder="NIP" name="nip">
+                        <small class="text-left text-danger"><?= form_error('nip'); ?></small>
                     </div>
 
                     <div class="form-group">
                         <input type="password" placeholder="Password" class="form-control underline-input" name="password">
+                        <small class="text-left text-danger"><?= form_error('password'); ?></small>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control underline-input" placeholder="Nama" name="nama">
+                        <small class="text-left text-danger"><?= form_error('nama'); ?></small>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control underline-input" placeholder="Nomer HP" name="nomer_hp">
+                        <small class="text-left text-danger"><?= form_error('nomer_hp'); ?></small>
                     </div>
-                    <div class="form-group">
-                        <select name="level" class="form-control">
-                            <?php foreach ($level as $l) : ?>
-                                <option value="<?= $l['id_level']; ?>"><?= $l['nama']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
                     <div class="form-group text-left mt-20">
                         <input type="submit" class="btn btn-greensea b-0 br-2 mr-5" value="Daftar">
                     </div>

@@ -20,11 +20,6 @@
 									<a href="#"><i class="fa fa-caret-right"></i>Teknisi</a>
 									<ul>
 										<li>
-											<a href="<?= base_url('barang'); ?>">
-												<i class="fa fa-caret-right"></i>Barang
-											</a>
-										</li>
-										<li>
 											<a href="<?= base_url('peminjaman'); ?>">
 												<i class="fa fa-caret-right"></i>Peminjaman
 											</a>
@@ -53,11 +48,6 @@
 										<li>
 											<a href="<?= base_url('pembelian'); ?>">
 												<i class="fa fa-caret-right"></i>Pembelian Barang
-											</a>
-										</li>
-										<li>
-											<a href="<?= base_url('teknisi'); ?>">
-												<i class="fa fa-caret-right"></i>Teknisi
 											</a>
 										</li>
 										<li>

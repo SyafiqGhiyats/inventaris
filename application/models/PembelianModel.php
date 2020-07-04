@@ -5,7 +5,7 @@ class PembelianModel extends CI_Model
 {
     public function getById($id)
     {
-        $this->db->select('keterangan,kode_barang,jumlah,pembelian.id_pembelian');
+        $this->db->select('keterangan,kode_barang,jumlah,pembelian.id_pembelian,status');
         $this->db->from('pembelian');
         $this->db->join('pembelian_detail', 'pembelian_detail.id_pembelian = pembelian.id_pembelian');
         $this->db->where('pembelian.id_pembelian', $id);

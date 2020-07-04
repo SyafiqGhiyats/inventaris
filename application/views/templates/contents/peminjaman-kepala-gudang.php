@@ -53,61 +53,56 @@
                     <!-- /tile header -->
 
                     <!-- tile body -->
-                    <div class="tile-body">
+                    <div class="tile-body" style="overflow: auto;padding:10px;">
                         <div class="row">
                             <div class="col-md-6">
                                 <div id="tableTools"></div>
                             </div>
-                            <div class="col-md-6">
-                                <button id="clickTambah" style="float: right;" class="btn btn-ef btn-ef-5 btn-ef-5b btn-success mb-10" data-toggle="modal" data-target="#splash" data-options="splash-2 splash-ef-14"><i class="fa fa-plus"></i> <span>Tambah</span></button>
-                            </div>
                         </div>
                         <br>
-                        <div class="table-responsive">
-                            <table class="table table-custom" id="advanced-usage">
-                                <thead>
+                        <table class="table table-custom" id="advanced-usage">
+                            <thead>
+                                <tr>
+                                    <th>NIP</th>
+                                    <th>Kode Barang</th>
+                                    <th>Keterangan</th>
+                                    <th>Status</th>
+                                    <th>Jumlah</th>
+                                    <th>Kep.Gudang</th>
+                                    <th>Kep.Gudang Status</th>
+                                    <th>Manajer</th>
+                                    <th>Manajer Status</th>
+                                    <th>Tanggal</th>
+                                    <th style="text-align: right;">Pilihan &nbsp;&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <?php $no = 1;
+                            foreach ($data as $d) : ?>
+                                <tbody>
                                     <tr>
-                                        <th>NIP</th>
-                                        <th>Kode Barang</th>
-                                        <th>Keterangan</th>
-                                        <th>Status</th>
-                                        <th>Jumlah</th>
-                                        <th>Kep.Gudang</th>
-                                        <th>Kep.Gudang Status</th>
-                                        <th>Manajer</th>
-                                        <th>Manajer Status</th>
-                                        <th>Tanggal</th>
-                                        <th style="text-align: right;">Pilihan &nbsp;&nbsp;</th>
+                                        <td><?= $d['nip']; ?></td>
+                                        <td><?= $d['kode_barang']; ?></td>
+                                        <td><?= $d['keterangan']; ?></td>
+                                        <td><?= $d['status']; ?></td>
+                                        <td><?= $d['jumlah']; ?></td>
+                                        <td><?= $d['kepala_gudang'] == '' ? 'Belum Dikonfirmasi' : $d['kepala_gudang'] ?></td>
+                                        <td><?= $d['kepala_gudang_status']; ?></td>
+                                        <td><?= $d['manajer'] == '' ? 'Belum Dikonfirmasi' : $d['manajer'] ?></td>
+                                        <td><?= $d['manajer_status']; ?></td>
+                                        <td><?= $d['tanggal']; ?></td>
+                                        <td>
+                                            <div class="text-center">
+                                                <a href="<?= base_url('peminjaman/accept_gudang/') . $d['id_peminjaman'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-check"></i> <span>Accept</span></a>
+                                                <a href="<?= base_url('peminjaman/reject_gudang/') . $d['id_peminjaman'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button"><i class="fa fa-ban"></i> <span>Reject</span></a>
+                                            </div>
+                                        </td>
+
                                     </tr>
-                                </thead>
-                                <?php $no = 1;
-                                foreach ($data as $d) : ?>
-                                    <tbody>
-                                        <tr>
-                                            <td><?= $d['nip']; ?></td>
-                                            <td><?= $d['kode_barang']; ?></td>
-                                            <td><?= $d['keterangan']; ?></td>
-                                            <td><?= $d['status']; ?></td>
-                                            <td><?= $d['jumlah']; ?></td>
-                                            <td><?= $d['kepala_gudang'] == '' ? 'Belum Dikonfirmasi' : $d['kepala_gudang'] ?></td>
-                                            <td><?= $d['kepala_gudang_status']; ?></td>
-                                            <td><?= $d['manajer'] == '' ? 'Belum Dikonfirmasi' : $d['manajer'] ?></td>
-                                            <td><?= $d['manajer_status']; ?></td>
-                                            <td><?= $d['tanggal']; ?></td>
-                                            <td>
-                                                <div class="text-center">
-                                                    <a href="<?= base_url('peminjaman/accept_gudang/') . $d['id_peminjaman'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-check"></i> <span>Accept</span></a>
-                                                    <a href="<?= base_url('peminjaman/reject_gudang/') . $d['id_peminjaman'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button"><i class="fa fa-ban"></i> <span>Reject</span></a>
-                                                </div>
-                                            </td>
+                                </tbody>
 
-                                        </tr>
-                                    </tbody>
-
-                                <?php $no++;
-                                endforeach; ?>
-                            </table>
-                        </div>
+                            <?php $no++;
+                            endforeach; ?>
+                        </table>
                     </div>
                     <!-- /tile body -->
 

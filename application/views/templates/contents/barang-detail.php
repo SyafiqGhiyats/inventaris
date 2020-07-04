@@ -10,7 +10,7 @@
                         <a href="<?= base_url() ?>"><i class="fa fa-home"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="#">Pembelian</a>
+                        <a href="#">Peminjaman</a>
                     </li>
                 </ul>
 
@@ -21,7 +21,7 @@
         <!-- row -->
         <div class="row">
             <!-- col -->
-            <div class="col-md-12">
+            <div class="col-md-6">
 
 
 
@@ -30,7 +30,7 @@
 
                     <!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
-                        <h1 class="custom-font">Data <strong class="text-capitalize"><?= str_replace('-', ' ', $title) ?></strong></h1>
+                        <h1 class="custom-font"><strong class="text-capitalize"><?= str_replace('-', ' ', $title) ?></strong></h1>
                         <ul class="controls">
                             <li class="dropdown">
 
@@ -54,62 +54,13 @@
 
                     <!-- tile body -->
                     <div class="tile-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div id="tableTools"></div>
-                            </div>
-                            <div class="col-md-6">
-                                <button id="clickTambah" style="float: right;" class="btn btn-ef btn-ef-5 btn-ef-5b btn-success mb-10" data-toggle="modal" data-target="#splash" data-options="splash-2 splash-ef-14"><i class="fa fa-plus"></i> <span>Tambah</span></button>
-                            </div>
-                        </div>
-                        <br>
-                        <table class="table table-custom" id="advanced-usage">
-                            <thead>
-                                <tr>
-                                    <th>NIP</th>
-                                    <th>Kode Barang</th>
-                                    <th>Keterangan</th>
-                                    <th>Status</th>
-                                    <th>Jumlah</th>
-                                    <th>Kep.Gudang</th>
-                                    <th>Kep.Gudang Status</th>
-                                    <th>Manajer</th>
-                                    <th>Manajer Status</th>
-                                    <th>Kep.Gudang2</th>
-                                    <th>Kep.Gudang2 Status</th>
-                                    <th>Tanggal</th>
-                                    <th style="text-align: right;">Pilihan &nbsp;&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <?php $no = 1;
-                            foreach ($data as $d) : ?>
-                                <tbody>
-                                    <tr>
-                                        <td><?= $d['nip']; ?></td>
-                                        <td><?= $d['kode_barang']; ?></td>
-                                        <td><?= $d['keterangan']; ?></td>
-                                        <td><?= $d['status']; ?></td>
-                                        <td><?= $d['jumlah']; ?></td>
-                                        <td><?= $d['kepala_gudang'] == '' ? 'Belum Dikonfirmasi' : $d['kepala_gudang'] ?></td>
-                                        <td><?= $d['kepala_gudang_status']; ?></td>
-                                        <td><?= $d['manajer'] == '' ? 'Belum Dikonfirmasi' : $d['manajer'] ?></td>
-                                        <td><?= $d['manajer_status']; ?></td>
-                                        <td><?= $d['kepala_gudang2'] == '' ? 'Belum Dikonfirmasi' : $d['kepala_gudang2'] ?></td>
-                                        <td><?= $d['kepala_gudang2_status']; ?></td>
-                                        <td><?= $d['tanggal']; ?></td>
-                                        <td>
-                                            <div class="text-center">
-                                                <a href="<?= base_url('pembelian/accept_gudang/') . $d['id_pembelian'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-check"></i> <span>Accept</span></a>
-                                                <a href="<?= base_url('pembelian/reject_gudang/') . $d['id_pembelian'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button"><i class="fa fa-ban"></i> <span>Reject</span></a>
-                                            </div>
-                                        </td>
-
-                                    </tr>
-                                </tbody>
-
-                            <?php $no++;
-                            endforeach; ?>
-                        </table>
+                        <img src="<?= base_url('gambar/') . $barang['gambar'] ?>" style="width: 30%;" alt="">
+                        <h1>
+                            <?= $barang['nama']; ?> <small>(Stok:<?= $barang['stok']; ?>)</small>
+                        </h1>
+                        <h4>Rp. <?= number_format($barang['harga'], 0, ",", "."); ?></h4>
+                        <h4><?= $barang['keterangan']; ?></h4>
+                        <p class="text-right"><?= $barang['tanggal']; ?></p>
                     </div>
                     <!-- /tile body -->
 
@@ -130,9 +81,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title custom-font" id="myModalLabel">Form pembelian</h3>
+                <h3 class="modal-title custom-font" id="myModalLabel">Form Peminjaman</h3>
             </div>
-            <form role="form" action="<?= base_url('pembelian/save'); ?>" id="form" method="post">
+            <form role="form" action="<?= base_url('peminjaman/save'); ?>" id="form" method="post">
                 <div class="modal-body">
                     <input type="hidden" name="id">
                     <div class="row">

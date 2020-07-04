@@ -53,10 +53,13 @@
                     <!-- /tile header -->
 
                     <!-- tile body -->
-                    <div class="tile-body">
+                    <div class="tile-body" style="overflow: auto;padding:10px;">
                         <div class="row">
                             <div class="col-md-6">
-                                <div id="tableTools"></div>
+                                <form class="form-inline my-2 my-lg-0" method="post">
+                                    <input class="form-control mr-sm-2" type="text" name="key" placeholder="Cari Barang" aria-label="Cari Barang">
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                </form>
                             </div>
                             <div class="col-md-6">
                                 <button id="clickTambah" style="float: right;" class="btn btn-ef btn-ef-5 btn-ef-5b btn-success mb-10" data-toggle="modal" data-target="#splash" data-options="splash-2 splash-ef-14"><i class="fa fa-plus"></i> <span>Tambah</span></button>

@@ -63,43 +63,45 @@
                             </div>
                         </div>
                         <br>
-                        <table class="table table-custom" id="advanced-usage">
-                            <thead>
-                                <tr>
-                                    <th>Kode Barang</th>
-                                    <th>ID Rak</th>
-                                    <th>Nama</th>
-                                    <th>Keterangan</th>
-                                    <th>Gambar</th>
-                                    <th>Harga</th>
-                                    <th>Stok</th>
-                                    <th>Tanggal</th>
-                                    <th style="text-align: right;">Pilihan &nbsp;&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <?php foreach ($data as $d) : ?>
-                                <tbody>
+                        <div class="table-responsive">
+                            <table class="table table-custom" id="advanced-usage">
+                                <thead>
                                     <tr>
-                                        <td><?= $d['kode_barang']; ?></td>
-                                        <td><?= $d['id_rak']; ?></td>
-                                        <td><?= $d['nama']; ?></td>
-                                        <td><?= $d['keterangan']; ?></td>
-                                        <td><?= $d['gambar']; ?></td>
-                                        <td><?= $d['harga']; ?></td>
-                                        <td><?= $d['stok']; ?></td>
-                                        <td><?= $d['tanggal']; ?></td>
-                                        <td>
-                                            <div class="pull-right">
-                                                <a href="<?= base_url('barang/ubah/') . $d['kode_barang'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-edit"></i> <span>Ubah</span></a>
-                                                <a href="<?= base_url('barang/hapus/') . $d['kode_barang'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button" value="'+data+'"><i class="fa fa-trash"></i> <span>Hapus</span></a>
-                                            </div>
-                                        </td>
-
+                                        <th>Kode Barang</th>
+                                        <th>ID Rak</th>
+                                        <th>Nama</th>
+                                        <th>Keterangan</th>
+                                        <th>Gambar</th>
+                                        <th>Harga</th>
+                                        <th>Stok</th>
+                                        <th>Tanggal</th>
+                                        <th style="text-align: right;">Pilihan &nbsp;&nbsp;</th>
                                     </tr>
-                                </tbody>
+                                </thead>
+                                <?php foreach ($data as $d) : ?>
+                                    <tbody>
+                                        <tr>
+                                            <td><?= $d['kode_barang']; ?></td>
+                                            <td><?= $d['id_rak']; ?></td>
+                                            <td><?= $d['nama']; ?></td>
+                                            <td><?= $d['keterangan']; ?></td>
+                                            <td><?= $d['gambar']; ?></td>
+                                            <td><?= $d['harga']; ?></td>
+                                            <td><?= $d['stok']; ?></td>
+                                            <td><?= $d['tanggal']; ?></td>
+                                            <td>
+                                                <div class="pull-right">
+                                                    <a href="<?= base_url('barang/ubah/') . $d['kode_barang'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-edit"></i> <span>Ubah</span></a>
+                                                    <a href="<?= base_url('barang/hapus/') . $d['kode_barang'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button" value="'+data+'"><i class="fa fa-trash"></i> <span>Hapus</span></a>
+                                                </div>
+                                            </td>
 
-                            <?php endforeach; ?>
-                        </table>
+                                        </tr>
+                                    </tbody>
+
+                                <?php endforeach; ?>
+                            </table>
+                        </div>
                     </div>
                     <!-- /tile body -->
 

@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -50,6 +50,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'dashboard';
+$route['laporan-peminjaman'] = 'LaporanPeminjaman';
+$route['laporan-pembelian'] = 'LaporanPembelian';
 $route['404_override'] = 'my404';
 $route['translate_uri_dashes'] = TRUE;
 

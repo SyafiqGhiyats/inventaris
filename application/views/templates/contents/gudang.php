@@ -10,7 +10,7 @@
                         <a href="<?= base_url() ?>"><i class="fa fa-home"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="#">Level</a>
+                        <a href="#">gudang</a>
                     </li>
                 </ul>
 
@@ -63,35 +63,37 @@
                             </div>
                         </div>
                         <br>
-                        <table class="table table-custom" id="advanced-usage">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Tanggal</th>
-                                    <th style="text-align: right;">Pilihan &nbsp;&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <?php $no = 1;
-                            foreach ($data as $d) : ?>
-                                <tbody>
+                        <div class="table-responsive">
+                            <table class="table table-custom" id="advanced-usage">
+                                <thead>
                                     <tr>
-                                        <td><?= $no; ?></td>
-                                        <td><?= $d['nama']; ?></td>
-                                        <td><?= $d['tanggal']; ?></td>
-                                        <td>
-                                            <div class="pull-right">
-                                                <a href="<?= base_url('gudang/ubah/') . $d['id_gudang'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-edit"></i> <span>Ubah</span></a>
-                                                <a href="<?= base_url('gudang/hapus/') . $d['id_gudang'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button" value="'+data+'"><i class="fa fa-trash"></i> <span>Hapus</span></a>
-                                            </div>
-                                        </td>
-
+                                        <th>No</th>
+                                        <th>Nama</th>
+                                        <th>Tanggal</th>
+                                        <th style="text-align: right;">Pilihan &nbsp;&nbsp;</th>
                                     </tr>
-                                </tbody>
+                                </thead>
+                                <?php $no = 1;
+                                foreach ($data as $d) : ?>
+                                    <tbody>
+                                        <tr>
+                                            <td><?= $no; ?></td>
+                                            <td><?= $d['nama']; ?></td>
+                                            <td><?= $d['tanggal']; ?></td>
+                                            <td>
+                                                <div class="pull-right">
+                                                    <a href="<?= base_url('gudang/ubah/') . $d['id_gudang'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-edit"></i> <span>Ubah</span></a>
+                                                    <a href="<?= base_url('gudang/hapus/') . $d['id_gudang'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button" value="'+data+'"><i class="fa fa-trash"></i> <span>Hapus</span></a>
+                                                </div>
+                                            </td>
 
-                            <?php $no++;
-                            endforeach; ?>
-                        </table>
+                                        </tr>
+                                    </tbody>
+
+                                <?php $no++;
+                                endforeach; ?>
+                            </table>
+                        </div>
                     </div>
                     <!-- /tile body -->
 

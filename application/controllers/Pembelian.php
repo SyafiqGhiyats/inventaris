@@ -27,13 +27,21 @@ class Pembelian extends Render_Controller
     }
     public function ubah($id)
     {
-        $this->title = 'Ubah pembelian';
-        $this->navigation = ['Dashboard'];
-        $this->plugins = [];
         $this->data['dataID'] = $this->model->getById($id);
         $this->data['barang'] = $this->db->get_where('barang', ['stok' > 0])->result_array();
-        $this->content = 'pembelian-ubah';
-        $this->render();
+        if ($this->data['dataID']['status'] == 'accepted') {
+            echo "<script>alert('Data tidak dapat diubah karna sudah disetujui')</script>";
+            redirect('pembelian', 'refresh');
+        } else if ($this->data['dataID']['status'] == 'rejected') {
+            echo "<script>alert('Data tidak dapat diubah karna sudah ditolak')</script>";
+            redirect('pembelian', 'refresh');
+        } else {
+            $this->title = 'Ubah pembelian';
+            $this->navigation = ['Dashboard'];
+            $this->plugins = [];
+            $this->content = 'pembelian-ubah';
+            $this->render();
+        }
     }
     public function accept_gudang($id)
     {
@@ -170,10 +178,19 @@ class Pembelian extends Render_Controller
     }
     public function hapus($id)
     {
-        $query = $this->model->delete($id);
-        if ($query) {
-            echo "<script>alert('Berhasil Dihapus')</script>";
+        $data = $this->db->get_where('pembelian', ['id_pembelian' => $id])->row_array();
+        if ($data['status'] == 'accepted') {
+            echo "<script>alert('Data tidak dapat dihapus karna sudah disetujui')</script>";
             redirect('pembelian', 'refresh');
+        } else if ($data['status'] == 'rejected') {
+            echo "<script>alert('Data tidak dapat dihapus karna sudah ditolak')</script>";
+            redirect('pembelian', 'refresh');
+        } else {
+            $query = $this->model->delete($id);
+            if ($query) {
+                echo "<script>alert('Berhasil Dihapus')</script>";
+                redirect('pembelian', 'refresh');
+            }
         }
     }
 

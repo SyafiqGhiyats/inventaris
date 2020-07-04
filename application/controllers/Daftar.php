@@ -11,12 +11,20 @@ class Daftar extends Render_Controller
         if ($this->session->userdata('status') == true) {
             redirect('dashboard', 'refresh');
         }
-        // Page Settings
-        $this->title = 'daftar';
-        $this->content = 'daftar';
-        $this->navigation = [];
-        $this->data['level'] = $this->db->get('level')->result_array();
-        $this->render();
+        $this->form_validation->set_rules('nip', 'NIP', 'required|numeric|min_length[9]');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('nomer_hp', 'No.HP', 'required|numeric|min_length[11]');
+
+        if ($this->form_validation->run() == false) {
+            $this->title = 'daftar';
+            $this->content = 'daftar';
+            $this->navigation = [];
+            $this->data['level'] = $this->db->get('level')->result_array();
+            $this->render();
+        } else {
+            $this->save();
+        }
     }
 
     public function save()
@@ -32,7 +40,7 @@ class Daftar extends Render_Controller
             'password' => $password,
             'nama' => $nama,
             'nomer_hp' => $nomer_hp,
-            'id_level' => $level
+            'id_level' => 1
         ];
         $query = $this->db->insert('users', $data);
         if ($query) {
@@ -48,6 +56,6 @@ class Daftar extends Render_Controller
         $this->load->library('plugin');
         $this->load->helper('url');
 
-        $this->load->library('b_password');
+        $this->load->library(['b_password', 'form_validation']);
     }
 }
