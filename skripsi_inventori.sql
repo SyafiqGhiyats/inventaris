@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2020 at 04:36 AM
+-- Generation Time: Jul 05, 2020 at 03:07 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -43,7 +43,7 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`kode_barang`, `id_rak`, `nama`, `keterangan`, `gambar`, `harga`, `stok`, `tanggal`) VALUES
-('BRG00001', 2, 'barang a', 'asdasd', 'Screenshot_(7).png', 1232, 102, '2020-06-29 13:01:45'),
+('BRG00001', 2, 'barang a', 'asdasd', 'Screenshot_(7).png', 1232, 100, '2020-07-04 02:44:46'),
 ('BRG00002', 2, 'barang b', 'sad', 'Screenshot_(12).png', 123, 100, '2020-06-29 03:59:30');
 
 -- --------------------------------------------------------
@@ -128,18 +128,17 @@ CREATE TABLE `pembelian_detail` (
   `manajer` varchar(20) DEFAULT NULL,
   `manajer_status` varchar(20) DEFAULT NULL,
   `kepala_gudang2` varchar(20) DEFAULT NULL,
-  `kepala_gudang2_status` varchar(20) DEFAULT NULL,
-  `tanggal` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `kepala_gudang2_status` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pembelian_detail`
 --
 
-INSERT INTO `pembelian_detail` (`id_pembelian_detail`, `id_pembelian`, `kode_barang`, `jumlah`, `total_harga`, `kepala_gudang`, `kepala_gudang_status`, `manajer`, `manajer_status`, `kepala_gudang2`, `kepala_gudang2_status`, `tanggal`) VALUES
-(3, 3, 'BRG00001', 4, 4928, '12345', 'rejected', '1234', 'accepted', '12345', 'accepted', '2020-06-29 13:04:53'),
-(5, 5, 'BRG00002', 10, 1230, '12345', 'rejected', NULL, 'Pending..', '12345', 'rejected', '2020-06-29 13:41:03'),
-(6, 6, 'BRG00002', 12, 1476, '12345', 'rejected', '1234', 'rejected', '12345', 'rejected', '2020-06-29 13:51:24');
+INSERT INTO `pembelian_detail` (`id_pembelian_detail`, `id_pembelian`, `kode_barang`, `jumlah`, `total_harga`, `kepala_gudang`, `kepala_gudang_status`, `manajer`, `manajer_status`, `kepala_gudang2`, `kepala_gudang2_status`) VALUES
+(3, 3, 'BRG00001', 4, 4928, '123456785', 'rejected', '123456783', 'accepted', '123456785', 'accepted'),
+(5, 5, 'BRG00002', 10, 1230, '123456785', 'rejected', NULL, 'Pending..', '123456785', 'rejected'),
+(6, 6, 'BRG00002', 13, 1476, '123456785', 'rejected', '123456783', 'rejected', '123456785', 'rejected');
 
 -- --------------------------------------------------------
 
@@ -160,14 +159,12 @@ CREATE TABLE `peminjaman` (
 --
 
 INSERT INTO `peminjaman` (`id_peminjaman`, `nip`, `keterangan`, `status`, `tanggal`) VALUES
-(1, '123', 'pinjam                                        ', 'accepted', '2020-06-29 04:20:19'),
-(5, '123', '                                       sad', 'Pending..', '2020-06-29 04:15:32'),
-(6, '123', 'haha                                        ', 'Pending..', '2020-06-29 04:15:22'),
-(7, '123', 'sdjmj                                        ', 'Pending..', '2020-06-29 04:16:16'),
-(8, '123', 'asdasd                                                                                ', 'Pending..', '2020-06-29 04:15:17'),
-(9, '12', 'BELI                                                                                ', 'Pending..', '2020-06-29 09:09:00'),
-(10, '12', 'BELI                                                                                ', 'Pending..', '2020-06-29 09:10:45'),
-(11, '123', 'pinjam                                                                                ', 'Pending..', '2020-06-29 09:24:06');
+(5, '123456782', '                                       sad', 'Pending..', '2020-06-29 04:15:32'),
+(6, '123456782', 'haha                                        ', 'accepted', '2020-07-04 02:44:46'),
+(7, '123456782', 'sdjmj                                        ', 'rejected', '2020-07-04 02:44:55'),
+(8, '123456782', 'asdasd                                                                                ', 'Pending..', '2020-06-29 04:15:17'),
+(11, '123456782', 'pinjam                                                                                ', 'Pending..', '2020-06-29 09:24:06'),
+(13, '123456781', 'pegnigeads                                        ', 'Pending..', '2020-07-04 09:13:36');
 
 -- --------------------------------------------------------
 
@@ -191,13 +188,10 @@ CREATE TABLE `peminjaman_detail` (
 --
 
 INSERT INTO `peminjaman_detail` (`id_peminjaman_detail`, `id_peminjaman`, `kode_barang`, `jumlah`, `kepala_gudang`, `kepala_gudang_status`, `manajer`, `manajer_status`) VALUES
-(1, 1, 'BRG00001', 10, '12345', 'accepted', '1234', 'accepted'),
-(6, 6, 'BRG00001', 2, NULL, 'Pending..', NULL, 'Pending..'),
-(7, 7, 'BRG00002', 12, NULL, 'Pending..', NULL, 'Pending..'),
-(8, 8, 'BRG00001', 6, NULL, 'Pending..', NULL, 'Pending..'),
-(9, 9, 'BRG00002', 4, NULL, 'Pending..', NULL, 'Pending..'),
-(10, 10, 'BRG00002', 4, NULL, 'Pending..', NULL, 'Pending..'),
-(11, 11, 'BRG00001', 5, NULL, 'Pending..', NULL, 'Pending..');
+(6, 6, 'BRG00001', 2, '123456785', 'accepted', '123456783', 'accepted'),
+(7, 7, 'BRG00002', 12, '123456785', 'rejected', '123456783', 'rejected'),
+(11, 11, 'BRG00001', 5, NULL, 'Pending..', NULL, 'Pending..'),
+(13, 13, 'BRG00002', 20, NULL, 'Pending..', NULL, 'Pending..');
 
 -- --------------------------------------------------------
 
@@ -239,10 +233,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`nip`, `password`, `nama`, `nomer_hp`, `id_level`, `tanggal`) VALUES
-('12', '$2y$10$CbpkTbX4KUDeFHSPxqdeVeoPL6ABh2S9ua.6gc70GQJt1hrpvfQIe', 'pgudang', '098798', 2, '2020-06-29 07:15:48'),
-('123', '$2y$10$0LSJWPOCZCI4vaM20AR0i.QXlfUI2f7kDUrmGpjWPcif6LeXdt9UC', 'syafiq', '0898989', 1, '2020-06-27 16:19:55'),
-('1234', '$2y$10$/eZ9XaaFbanmxf4eE6R/euBwFP5mdAVODBUR26Ea5X7CdPXIZ5faW', 'user', '0898768678', 4, '2020-06-28 07:27:10'),
-('12345', '$2y$10$ueIktHAxigUW7YE1qb4znOFaBQEDC6IdUkN9SjB.xnzbYZcjrxO2e', 'kepgudang', '123', 3, '2020-06-29 01:12:47');
+('123456781', '$2y$10$h2CPL4oHcg7XHFcQCD5ex.NBGWP7vUprmQi7qco33APefcWTiaTba', 'asdsad', '089878767867', 1, '2020-07-03 13:25:30'),
+('123456782', '$2y$10$0LSJWPOCZCI4vaM20AR0i.QXlfUI2f7kDUrmGpjWPcif6LeXdt9UC', 'syafiq', '0898989', 2, '2020-07-05 00:05:24'),
+('123456783', '$2y$10$/eZ9XaaFbanmxf4eE6R/euBwFP5mdAVODBUR26Ea5X7CdPXIZ5faW', 'user', '0898768678', 4, '2020-07-04 02:18:49'),
+('123456785', '$2y$10$ueIktHAxigUW7YE1qb4znOFaBQEDC6IdUkN9SjB.xnzbYZcjrxO2e', 'kepgudang', '123', 3, '2020-07-04 02:18:29');
 
 --
 -- Indexes for dumped tables
@@ -347,13 +341,13 @@ ALTER TABLE `pembelian_detail`
 -- AUTO_INCREMENT for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `peminjaman_detail`
 --
 ALTER TABLE `peminjaman_detail`
-  MODIFY `id_peminjaman_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_peminjaman_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `rak`
