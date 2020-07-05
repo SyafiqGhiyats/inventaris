@@ -61,8 +61,13 @@
 											</a>
 										</li>
 										<li>
-											<a href="<?= base_url('laporan'); ?>">
-												<i class="fa fa-caret-right"></i>Laporan
+											<a href="<?= base_url('laporan-pembelian'); ?>">
+												<i class="fa fa-caret-right"></i>Laporan Pembelian
+											</a>
+										</li>
+										<li>
+											<a href="<?= base_url('laporan-peminjaman'); ?>">
+												<i class="fa fa-caret-right"></i>Laporan Peminjaman
 											</a>
 										</li>
 									</ul>
@@ -87,8 +92,13 @@
 											</a>
 										</li>
 										<li>
-											<a href="<?= base_url('laporan'); ?>">
-												<i class="fa fa-caret-right"></i>Laporan
+											<a href="<?= base_url('laporan-pembelian'); ?>">
+												<i class="fa fa-caret-right"></i>Laporan Pembelian
+											</a>
+										</li>
+										<li>
+											<a href="<?= base_url('laporan-peminjaman'); ?>">
+												<i class="fa fa-caret-right"></i>Laporan Peminjaman
 											</a>
 										</li>
 									</ul>
@@ -113,8 +123,13 @@
 											</a>
 										</li>
 										<li>
-											<a href="<?= base_url('laporan'); ?>">
-												<i class="fa fa-caret-right"></i>Laporan
+											<a href="<?= base_url('laporan-pembelian'); ?>">
+												<i class="fa fa-caret-right"></i>Laporan Pembelian
+											</a>
+										</li>
+										<li>
+											<a href="<?= base_url('laporan-peminjaman'); ?>">
+												<i class="fa fa-caret-right"></i>Laporan Peminjaman
 											</a>
 										</li>
 									</ul>
