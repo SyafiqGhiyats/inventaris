@@ -83,13 +83,11 @@
                                     <tbody>
                                         <tr>
                                             <td><?= $no; ?></td>
-                                            <td><?= $d['id_gudang']; ?></td>
                                             <td><?= $d['nama']; ?></td>
                                             <td><?= $d['tanggal']; ?></td>
                                             <td>
                                                 <div class="pull-right">
                                                     <a href="<?= base_url('rak/ubah/') . $d['id_rak'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-edit"></i> <span>Ubah</span></a>
-
                                                 </div>
                                             </td>
 

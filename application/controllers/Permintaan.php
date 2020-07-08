@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 require APPPATH . 'libraries/Render_Controller.php';
 
-class Peminjaman extends Render_Controller
+class Permintaan extends Render_Controller
 {
 
     public function index()
@@ -16,16 +16,16 @@ class Peminjaman extends Render_Controller
         $this->data['data'] = $this->model->get();
         $this->data['barang'] = $brg;
         if ($this->session->userdata('id_level') == 1) {
-            $this->content = 'peminjaman-teknisi';
+            $this->content = 'permintaan-teknisi';
         } elseif ($this->session->userdata('id_level') == 2) {
-            $this->content = 'peminjaman-kepala-gudang';
+            $this->content = 'permintaan-petugas-gudang';
         } elseif ($this->session->userdata('id_level') == 3) {
-            $this->content = 'peminjaman-kepala-gudang';
+            $this->content = 'permintaan-kepala-gudang';
         } elseif ($this->session->userdata('id_level') == 4) {
-            $this->content = 'peminjaman-manajer';
+            $this->content = 'permintaan-manajer';
         }
         if ($key) {
-            $this->content = 'peminjaman-barang';
+            $this->content = 'permintaan-barang';
             $this->data['barang'] = $this->db->like('nama', $key)->get('barang')->result_array();
         }
         $this->title = $this->content;
@@ -33,7 +33,7 @@ class Peminjaman extends Render_Controller
     }
     public function detail($id)
     {
-        $this->title = 'Detail Peminjaman';
+        $this->title = 'Detail permintaan';
         $this->navigation = ['Dashboard'];
         $this->plugins = [];
         $this->data['barang'] = $this->db->get_where('barang', ['kode_barang' => $id])->row_array();
@@ -46,15 +46,15 @@ class Peminjaman extends Render_Controller
         $this->data['barang'] = $this->db->get_where('barang', ['stok' > 0])->result_array();
         if ($this->data['dataID']['status'] == 'accepted') {
             echo "<script>alert('Data tidak dapat diubah karna sudah disetujui')</script>";
-            redirect('peminjaman', 'refresh');
+            redirect('permintaan', 'refresh');
         } else if ($this->data['dataID']['status'] == 'rejected') {
             echo "<script>alert('Data tidak dapat diubah karna sudah ditolak')</script>";
-            redirect('peminjaman', 'refresh');
+            redirect('permintaan', 'refresh');
         } else {
-            $this->title = 'Ubah Peminjaman';
+            $this->title = 'Ubah permintaan';
             $this->navigation = ['Dashboard'];
             $this->plugins = [];
-            $this->content = 'peminjaman-ubah';
+            $this->content = 'permintaan-ubah';
             $this->render();
         }
     }
@@ -62,28 +62,29 @@ class Peminjaman extends Render_Controller
     {
         $this->db->set('kepala_gudang', $this->session->userdata('nip'));
         $this->db->set('kepala_gudang_status', 'accepted');
-        $this->db->where('id_peminjaman_detail', $id);
-        $query = $this->db->update('peminjaman_detail');
+        $this->db->where('id_permintaan_detail', $id);
+        $query = $this->db->update('permintaan_detail');
         if ($query) {
             echo "<script>alert('Permintaan telah diterima')</script>";
-            redirect('peminjaman', 'refresh');
+            redirect('permintaan', 'refresh');
         }
     }
     public function reject_gudang($id)
     {
         $this->db->set('kepala_gudang', $this->session->userdata('nip'));
         $this->db->set('kepala_gudang_status', 'rejected');
-        $this->db->where('id_peminjaman_detail', $id);
-        $query = $this->db->update('peminjaman_detail');
+        $this->db->where('id_permintaan_detail', $id);
+        $query = $this->db->update('permintaan_detail');
         if ($query) {
             echo "<script>alert('Permintaan telah ditolak')</script>";
-            redirect('peminjaman', 'refresh');
+            redirect('permintaan', 'refresh');
         }
     }
     public function accept_manajer($id)
     {
-        $data_peminjaman = [
+        $data_permintaan = [
             'status' => 'accepted',
+            'sort' => 1
         ];
         $data_detail = [
             'manajer' => $this->session->userdata('nip'),
@@ -91,29 +92,39 @@ class Peminjaman extends Render_Controller
 
         ];
         $query = $this->db->select('*');
-        $query = $this->db->from('peminjaman_detail pd');
-        $query = $this->db->join('peminjaman p', 'p.id_peminjaman = pd.id_peminjaman', 'left');
+        $query = $this->db->from('permintaan_detail pd');
+        $query = $this->db->join('permintaan p', 'p.id_permintaan = pd.id_permintaan', 'left');
         $query = $this->db->join('barang b', 'b.kode_barang = pd.kode_barang', 'left');
-        $query = $this->db->where('id_peminjaman_detail', $id);
+        $query = $this->db->where('id_permintaan_detail', $id);
         $data = $this->db->get()->row_array();
-        $query = $this->db->where('id_peminjaman', $id);
-        $query = $this->db->update('peminjaman', $data_peminjaman);
-        $query = $this->db->where('id_peminjaman_detail', $data['id_peminjaman_detail']);
-        $query = $this->db->update('peminjaman_detail', $data_detail);
-        $data_barang = [
-            'stok' => ($data['stok'] - $data['jumlah'])
-        ];
-        $query = $this->db->where('kode_barang', $data['kode_barang']);
-        $query = $this->db->update('barang', $data_barang);
+        if ($data['kepala_gudang_status'] != 'Pending..') {
+            if ($data['manajer_status'] != 'Pending..') {
+                echo "<script>alert('Barang ini telah dikonfirmasi,tidak bisa mengkonfirmasi ulang')</script>";
+                redirect('pembelian', 'refresh');
+            } else {
+                $query = $this->db->where('id_permintaan', $id);
+                $query = $this->db->update('permintaan', $data_permintaan);
+                $query = $this->db->where('id_permintaan_detail', $data['id_permintaan_detail']);
+                $query = $this->db->update('permintaan_detail', $data_detail);
+                $data_barang = [
+                    'stok' => ($data['stok'] - $data['jumlah'])
+                ];
+                $query = $this->db->where('kode_barang', $data['kode_barang']);
+                $query = $this->db->update('barang', $data_barang);
 
-        if ($query) {
-            echo "<script>alert('Permintaan telah diterima')</script>";
-            redirect('peminjaman', 'refresh');
+                if ($query) {
+                    echo "<script>alert('Permintaan telah diterima')</script>";
+                    redirect('permintaan', 'refresh');
+                }
+            }
+        } else {
+            echo "<script>alert('Harap Tunggu konfirmasi dari kepala gudang')</script>";
+            redirect('pembelian', 'refresh');
         }
     }
     public function reject_manajer($id)
     {
-        $data_peminjaman = [
+        $data_permintaan = [
             'status' => 'rejected'
         ];
         $data_detail = [
@@ -121,19 +132,29 @@ class Peminjaman extends Render_Controller
             'manajer_status' => 'rejected'
         ];
         $query = $this->db->select('*');
-        $query = $this->db->from('peminjaman_detail pd');
-        $query = $this->db->join('peminjaman p', 'p.id_peminjaman = pd.id_peminjaman', 'left');
-        $query = $this->db->where('id_peminjaman_detail', $id);
+        $query = $this->db->from('permintaan_detail pd');
+        $query = $this->db->join('permintaan p', 'p.id_permintaan = pd.id_permintaan', 'left');
+        $query = $this->db->where('id_permintaan_detail', $id);
         $data = $this->db->get()->row_array();
-        $query = $this->db->where('id_peminjaman', $id);
-        $query = $this->db->update('peminjaman', $data_peminjaman);
-        $query = $this->db->where('id_peminjaman_detail', $data['id_peminjaman_detail']);
-        $query = $this->db->update('peminjaman_detail', $data_detail);
+        if ($data['kepala_gudang_status'] != 'Pending..') {
+            if ($data['manajer_status'] != 'Pending..') {
+                echo "<script>alert('Barang ini telah Tolak,tidak bisa menyetujui lagi')</script>";
+                redirect('permintaan', 'refresh');
+            } else {
+                $query = $this->db->where('id_permintaan', $id);
+                $query = $this->db->update('permintaan', $data_permintaan);
+                $query = $this->db->where('id_permintaan_detail', $data['id_permintaan_detail']);
+                $query = $this->db->update('permintaan_detail', $data_detail);
 
 
-        if ($query) {
-            echo "<script>alert('Permintaan telah ditolak')</script>";
-            redirect('peminjaman', 'refresh');
+                if ($query) {
+                    echo "<script>alert('Permintaan telah ditolak')</script>";
+                    redirect('permintaan', 'refresh');
+                }
+            }
+        } else {
+            echo "<script>alert('harap menunggu konfirmasi dari kepala gudang')</script>";
+            redirect('pembelian', 'refresh');
         }
     }
     public function save()
@@ -147,6 +168,7 @@ class Peminjaman extends Render_Controller
             'nip' => $nip,
             'keterangan' => $keterangan,
             'status' => 'Pending..',
+            'sort' => 0
         ];
         $data_detail = [
             'kode_barang' => $barang,
@@ -159,30 +181,30 @@ class Peminjaman extends Render_Controller
             $query = $this->model->insert($data_pinjam, $data_detail);
             if ($query) {
                 echo "<script>alert('Berhasil Ditambahkan')</script>";
-                redirect('peminjaman', 'refresh');
+                redirect('permintaan', 'refresh');
             }
         } else {
             $query = $this->model->update($id);
             if ($query) {
                 echo "<script>alert('Berhasil Diubah')</script>";
-                redirect('peminjaman', 'refresh');
+                redirect('permintaan', 'refresh');
             }
         }
     }
     public function hapus($id)
     {
-        $data = $this->db->get_where('peminjaman', ['id_peminjaman' => $id])->row_array();
+        $data = $this->db->get_where('permintaan', ['id_permintaan' => $id])->row_array();
         if ($data['status'] == 'accepted') {
             echo "<script>alert('Data tidak dapat dihapus karna sudah disetujui')</script>";
-            redirect('peminjaman', 'refresh');
+            redirect('permintaan', 'refresh');
         } else if ($data['status'] == 'rejected') {
             echo "<script>alert('Data tidak dapat dihapus karna sudah ditolak')</script>";
-            redirect('peminjaman', 'refresh');
+            redirect('permintaan', 'refresh');
         } else {
             $query = $this->model->delete($id);
             if ($query) {
                 echo "<script>alert('Berhasil Dihapus')</script>";
-                redirect('peminjaman', 'refresh');
+                redirect('permintaan', 'refresh');
             }
         }
     }
@@ -197,6 +219,6 @@ class Peminjaman extends Render_Controller
         // cek session
         // -------------------------------------------------
         $this->sesion->cek_session();
-        $this->load->model('peminjamanModel', 'model');
+        $this->load->model('permintaanModel', 'model');
     }
 }

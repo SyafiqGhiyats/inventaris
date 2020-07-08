@@ -50,8 +50,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'dashboard';
-$route['laporan-peminjaman'] = 'LaporanPeminjaman';
+$route['laporan-permintaan'] = 'LaporanPermintaan';
 $route['laporan-pembelian'] = 'LaporanPembelian';
+$route['laporan-pembelian/cetak'] = 'LaporanPembelian/cetak';
+$route['laporan-permintaan/cetak'] = 'LaporanPermintaan/cetak';
 $route['404_override'] = 'my404';
 $route['translate_uri_dashes'] = TRUE;
 

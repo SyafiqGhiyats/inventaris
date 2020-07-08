@@ -3,12 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 require APPPATH . 'libraries/Render_Controller.php';
 
-class LaporanPeminjaman extends Render_Controller
+class LaporanPermintaan extends Render_Controller
 {
     public function index()
     {
         // Page Settings
-        $this->title = 'Laporan peminjaman';
+        $this->title = 'Laporan permintaan';
         $this->navigation = ['Dashboard'];
         $this->plugins = [];
         if ($this->input->get('filter') == 'accepted') {
@@ -28,8 +28,36 @@ class LaporanPeminjaman extends Render_Controller
         } else {
             $this->data['data'] = $this->model->get();
         }
-        $this->content = 'laporan-peminjaman';
+        $this->content = 'laporan-permintaan';
         $this->render();
+    }
+
+    public function cetak()
+    {
+        if ($this->input->get('filter') == 'accepted') {
+            $data['records'] = $this->model->filter_accept();
+        } elseif ($this->input->get('filter') == 'rejected') {
+            $data['records'] = $this->model->filter_reject();
+        } elseif ($this->input->get('filter') == 'pending') {
+            $data['records'] = $this->model->filter_pending();
+        } elseif ($this->input->get('start_date') != '' && $this->input->get('end_date') != '') {
+            $data['records'] = $this->model->filter_tanggal();
+        } elseif ($this->input->get('filter') == 'today') {
+            $data['records'] = $this->model->filter_today();
+        } elseif ($this->input->get('filter') == 'last-week') {
+            $data['records'] = $this->model->last_week();
+        } elseif ($this->input->get('filter') == 'last-month') {
+            $data['records'] = $this->model->last_month();
+        } else {
+            $data['records'] = $this->model->get();
+        }
+
+        // Config PDF
+        $config['html'] = 'templates/cetak/laporan-permintaan';
+        $config['data'] = $data;
+        $config['filename'] = 'LAPORAN_PERMINTAAN_' . date('y-m-d');
+
+        $this->pdf->render($config);
     }
 
     function __construct()
@@ -38,10 +66,11 @@ class LaporanPeminjaman extends Render_Controller
         // Page Settings
         $this->default_template = 'templates/dashboard';
         $this->load->library('plugin');
+        $this->load->library('pdf');
         $this->load->helper('url');
         // cek session
         // -------------------------------------------------
         $this->sesion->cek_session();
-        $this->load->model('LaporanPeminjamanModel', 'model');
+        $this->load->model('LaporanPermintaanModel', 'model');
     }
 }

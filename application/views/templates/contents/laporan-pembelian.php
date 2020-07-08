@@ -86,10 +86,16 @@
                             </div>
                         </div>
                         <br>
+                        <?php if(!empty($this->input->get('filter'))) :?>
+                            <a style="float: right;" href="<?= base_url('laporan-pembelian/cetak?filter='). $this->input->get('filter') ?>" class="btn btn-danger">Export Pdf</a>
+                            <?php elseif (!empty($this->input->get('start_date'))!= '' && !empty($this->input->get('end_date'))!= ''): ?>
+                            <a style="float: right;" href="<?= base_url('laporan-pembelian/cetak?start_date='. $this->input->get('start_date').'&end_date='.$this->input->get('end_date')  )?>" class="btn btn-danger">Export Pdf</a>
+                            <?php else: ?>
+                                <a style="float: right;" href="<?= base_url('laporan-pembelian/cetak')?>" class="btn btn-danger">Export Pdf</a>
+                        <?php endif; ?>
                         <table class="table table-custom" id="advanced-usage">
                             <thead>
                                 <tr>
-                                    <th>ID Pembelian</th>
                                     <th>NIP</th>
                                     <th>Kode Barang</th>
                                     <th>Keterangan</th>
@@ -99,8 +105,6 @@
                                     <th>Kep.Gudang Status</th>
                                     <th>Manajer</th>
                                     <th>Manajer Status</th>
-                                    <th>Kep.Gudang</th>
-                                    <th>Kep.Gudang Status</th>
                                     <th>Tanggal</th>
                                 </tr>
                             </thead>
@@ -108,7 +112,6 @@
                             foreach ($data as $d) : ?>
                                 <tbody>
                                     <tr>
-                                        <td><?= $d['id_pembelian']; ?></td>
                                         <td><?= $d['nip']; ?></td>
                                         <td><?= $d['kode_barang']; ?></td>
                                         <td><?= $d['keterangan']; ?></td>
@@ -118,8 +121,6 @@
                                         <td><?= $d['kepala_gudang_status']; ?></td>
                                         <td><?= $d['manajer'] == '' ? 'Belum Dikonfirmasi' : $d['manajer'] ?></td>
                                         <td><?= $d['manajer_status']; ?></td>
-                                        <td><?= $d['kepala_gudang2'] == '' ? 'Belum Dikonfirmasi' : $d['kepala_gudang2'] ?></td>
-                                        <td><?= $d['kepala_gudang2_status']; ?></td>
                                         <td><?= $d['tanggal']; ?></td>
 
                                     </tr>

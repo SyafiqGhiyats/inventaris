@@ -404,17 +404,19 @@ class Cellmap {
     $node = $frame->get_node();
     
     // Determine where this cell is going
-    $colspan = $node->getAttribute("colspan");
-    $rowspan = $node->getAttribute("rowspan");
+    if (get_class($node) != 'DOMText') {
+      $colspan = $node->getAttribute("colspan");
+      $rowspan = $node->getAttribute("rowspan");
 
-    if ( !$colspan ) {
-      $colspan = 1;
-      $node->setAttribute("colspan",1);
-    }
+      if ( !$colspan ) {
+        $colspan = 1;
+        $node->setAttribute("colspan",1);
+      }
 
-    if ( !$rowspan ) {
-      $rowspan = 1;
-      $node->setAttribute("rowspan",1);
+      if ( !$rowspan ) {
+        $rowspan = 1;
+        $node->setAttribute("rowspan",1);
+      }
     }
     $key = $frame->get_id();
 

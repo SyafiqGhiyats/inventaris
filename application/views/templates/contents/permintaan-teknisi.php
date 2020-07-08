@@ -10,7 +10,7 @@
                         <a href="<?= base_url() ?>"><i class="fa fa-home"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="#">Peminjaman</a>
+                        <a href="#">Permintaan</a>
                     </li>
                 </ul>
 
@@ -99,8 +99,8 @@
                                             <td><?= $d['tanggal']; ?></td>
                                             <td>
                                                 <div class="text-center">
-                                                    <a href="<?= base_url('peminjaman/ubah/') . $d['id_peminjaman'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-edit"></i> <span>Ubah</span></a>
-                                                    <a href="<?= base_url('peminjaman/hapus/') . $d['id_peminjaman'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button" value="'+data+'"><i class="fa fa-trash"></i> <span>Hapus</span></a>
+                                                    <a href="<?= base_url('permintaan/ubah/') . $d['id_permintaan'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-edit"></i> <span>Ubah</span></a>
+                                                    <a href="<?= base_url('permintaan/hapus/') . $d['id_permintaan'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button" value="'+data+'"><i class="fa fa-trash"></i> <span>Hapus</span></a>
                                                 </div>
                                             </td>
 
@@ -131,9 +131,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title custom-font" id="myModalLabel">Form Peminjaman</h3>
+                <h3 class="modal-title custom-font" id="myModalLabel">Form Permintaan</h3>
             </div>
-            <form role="form" action="<?= base_url('peminjaman/save'); ?>" id="form" method="post">
+            <form role="form" action="<?= base_url('permintaan/save'); ?>" id="form" method="post">
                 <div class="modal-body">
                     <input type="hidden" name="id">
                     <div class="row">

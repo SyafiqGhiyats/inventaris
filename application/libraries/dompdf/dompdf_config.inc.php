@@ -369,18 +369,6 @@ function DOMPDF_autoload($class) {
   if ( is_file($filename) )
     require_once($filename);
 }
-// function DOMPDF_autoload($class) { 
-//   //don't check for namespaced files/classes   
-//   if(strpos($class, "\\") > 0) return;
-
-//   if($class=='UFPDF') return ;
-
-//   $filename = mb_strtolower($class) . ".cls.php";
-
-//   require(DOMPDF_INC_DIR . "/$filename");
-// }
-// spl_autoload_register('DOMPDF_autoload');
-
 
 // If SPL autoload functions are available (PHP >= 5.1.2)
 if ( function_exists("spl_autoload_register") ) {
@@ -440,12 +428,11 @@ else if ( !function_exists("__autoload") ) {
    *
    * @param string $class
    */
-  function __autoload($class) {
+  
+  function spl_autoload_register($class) {
     DOMPDF_autoload($class);
   }
 }
-
-
 
 // ### End of user-configurable options ###
 

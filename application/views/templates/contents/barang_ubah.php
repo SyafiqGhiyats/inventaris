@@ -89,18 +89,10 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="">Gambar</label>
                                                 <input type="file" class="form-control" name="gambar" id="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Harga</label>
-                                                <input type="number" value="<?= $dataID['harga']; ?>" class="form-control" required name="harga">
                                             </div>
                                         </div>
                                         <div class="col-md-6">

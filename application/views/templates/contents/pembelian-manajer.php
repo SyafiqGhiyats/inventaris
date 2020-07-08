@@ -72,8 +72,6 @@
                                     <th>Kep.Gudang Status</th>
                                     <th>Manajer</th>
                                     <th>Manajer Status</th>
-                                    <th>Kep.Gudang</th>
-                                    <th>Kep.Gudang Status</th>
                                     <th>Tanggal</th>
                                     <th style="text-align: right;">Pilihan &nbsp;&nbsp;</th>
                                 </tr>
@@ -91,8 +89,6 @@
                                         <td><?= $d['kepala_gudang_status']; ?></td>
                                         <td><?= $d['manajer'] == '' ? 'Belum Dikonfirmasi' : $d['manajer'] ?></td>
                                         <td><?= $d['manajer_status']; ?></td>
-                                        <td><?= $d['kepala_gudang2'] == '' ? 'Belum Dikonfirmasi' : $d['kepala_gudang2'] ?></td>
-                                        <td><?= $d['kepala_gudang2_status']; ?></td>
                                         <td><?= $d['tanggal']; ?></td>
                                         <td>
                                             <div class="text-center">

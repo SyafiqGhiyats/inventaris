@@ -6,6 +6,7 @@ class LaporanPembelianModel extends CI_Model
     public function get()
     {
         $query = $this->db->join('pembelian_detail a', 'a.id_pembelian_detail = b.id_pembelian')
+        ->order_by('sort', 'ASC')
             ->get('pembelian b')->result_array();
         return $query;
     }
@@ -35,6 +36,7 @@ class LaporanPembelianModel extends CI_Model
         $tgl2 = date('Y-m-d', strtotime($tgl2) + (60 * 60 * 24));
         $query = $this->db->join('pembelian_detail a', 'a.id_pembelian_detail = b.id_pembelian');
         $query = $this->db->where("tanggal >= '$tgl1' AND tanggal <= '$tgl2'");
+        $query = $this->db->order_by('sort', 'ASC');
         $query = $this->db->get('pembelian b')->result_array();
         return $query;
     }
@@ -43,6 +45,7 @@ class LaporanPembelianModel extends CI_Model
         $tgl = date('Y-m-d', time());
         $query = $this->db->join('pembelian_detail a', 'a.id_pembelian_detail = b.id_pembelian');
         $query = $this->db->like("tanggal", $tgl);
+        $query = $this->db->order_by('sort', 'ASC');
         $query = $this->db->get('pembelian b')->result_array();
         return $query;
     }
@@ -52,6 +55,7 @@ class LaporanPembelianModel extends CI_Model
         $tgl2 = date('Y-m-d', time() - (60 * 60 * 24 * 7));
         $query = $this->db->join('pembelian_detail a', 'a.id_pembelian_detail = b.id_pembelian')
             ->where("tanggal >= '$tgl2' AND tanggal <= '$tgl1'")
+            ->order_by('sort', 'ASC')
             ->get('pembelian b')->result_array();
         return $query;
     }
@@ -60,6 +64,7 @@ class LaporanPembelianModel extends CI_Model
         $month = date('Y-m', time() - 60 * 60 * 24 * 30);
         $query = $this->db->join('pembelian_detail a', 'a.id_pembelian_detail = b.id_pembelian')
             ->like('tanggal', $month)
+            ->order_by('sort', 'ASC')
             ->get('pembelian b')->result_array();
         return $query;
     }

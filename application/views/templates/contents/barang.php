@@ -72,7 +72,6 @@
                                         <th>Nama</th>
                                         <th>Keterangan</th>
                                         <th>Gambar</th>
-                                        <th>Harga</th>
                                         <th>Stok</th>
                                         <th>Tanggal</th>
                                         <th style="text-align: right;">Pilihan &nbsp;&nbsp;</th>
@@ -86,7 +85,6 @@
                                             <td><?= $d['nama']; ?></td>
                                             <td><?= $d['keterangan']; ?></td>
                                             <td><?= $d['gambar']; ?></td>
-                                            <td><?= $d['harga']; ?></td>
                                             <td><?= $d['stok']; ?></td>
                                             <td><?= $d['tanggal']; ?></td>
                                             <td>
@@ -154,18 +152,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Gambar</label>
                                 <input type="file" required class="form-control" name="gambar" id="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="">Harga</label>
-                                <input type="number" class="form-control" required name="harga">
                             </div>
                         </div>
                         <div class="col-md-6">

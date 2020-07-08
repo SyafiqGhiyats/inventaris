@@ -9,7 +9,7 @@
                         <a href="<?= base_url() ?>"><i class="fa fa-home"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="#">Peminjaman</a>
+                        <a href="#">Permintaan</a>
                     </li>
                 </ul>
 
@@ -91,8 +91,8 @@
                                         <td><?= $d['tanggal']; ?></td>
                                         <td>
                                             <div class="text-center">
-                                                <a href="<?= base_url('peminjaman/accept_manajer/') . $d['id_peminjaman'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-check"></i> <span>Accept</span></a>
-                                                <a href="<?= base_url('peminjaman/reject_manajer/') . $d['id_peminjaman'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button"><i class="fa fa-ban"></i> <span>Reject</span></a>
+                                                <a href="<?= base_url('permintaan/accept_manajer/') . $d['id_permintaan'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-check"></i> <span>Accept</span></a>
+                                                <a href="<?= base_url('permintaan/reject_manajer/') . $d['id_permintaan'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button"><i class="fa fa-ban"></i> <span>Reject</span></a>
                                             </div>
                                         </td>
 

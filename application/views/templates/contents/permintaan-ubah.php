@@ -9,7 +9,7 @@
                         <a href="<?= base_url() ?>"><i class="fa fa-home"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="#">peminjaman</a>
+                        <a href="#">Permintaan</a>
                     </li>
                 </ul>
 
@@ -55,10 +55,10 @@
                     <div class="tile-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <form role="form" action="<?= base_url('peminjaman/save'); ?>" id="form" method="post">
+                                <form role="form" action="<?= base_url('permintaan/save'); ?>" id="form" method="post">
 
                                     <input type="hidden" name="status" value="<?= $dataID['status']; ?>">
-                                    <input type="hidden" name="id" value="<?= $dataID['id_peminjaman']; ?>">
+                                    <input type="hidden" name="id" value="<?= $dataID['id_permintaan']; ?>">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">

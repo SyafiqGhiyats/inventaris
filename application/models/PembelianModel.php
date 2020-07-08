@@ -17,6 +17,7 @@ class PembelianModel extends CI_Model
         $this->db->select('*');
         $this->db->from('pembelian');
         $this->db->join('pembelian_detail', 'pembelian_detail.id_pembelian = pembelian.id_pembelian');
+        $this->db->order_by('sort', 'ASC');
         $query = $this->db->get();
         return $query->result_array();
     }

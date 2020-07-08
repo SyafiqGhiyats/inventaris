@@ -20,13 +20,13 @@
 									<a href="#"><i class="fa fa-caret-right"></i>Teknisi</a>
 									<ul>
 										<li>
-											<a href="<?= base_url('peminjaman'); ?>">
-												<i class="fa fa-caret-right"></i>Peminjaman
+											<a href="<?= base_url('permintaan'); ?>">
+												<i class="fa fa-caret-right"></i>Permintaan
 											</a>
 										</li>
 										<li>
-											<a href="<?= base_url('laporan-peminjaman'); ?>">
-												<i class="fa fa-caret-right"></i>Laporan Peminjaman
+											<a href="<?= base_url('laporan-permintaan'); ?>">
+												<i class="fa fa-caret-right"></i>Laporan permintaan
 											</a>
 										</li>
 									</ul>
@@ -41,18 +41,13 @@
 											</a>
 										</li>
 										<li>
-											<a href="<?= base_url('peminjaman'); ?>">
-												<i class="fa fa-caret-right"></i>Peminjaman
+											<a href="<?= base_url('permintaan'); ?>">
+												<i class="fa fa-caret-right"></i>Permintaan
 											</a>
 										</li>
 										<li>
 											<a href="<?= base_url('pembelian'); ?>">
 												<i class="fa fa-caret-right"></i>Pembelian Barang
-											</a>
-										</li>
-										<li>
-											<a href="<?= base_url('gudang'); ?>">
-												<i class="fa fa-caret-right"></i>Gudang
 											</a>
 										</li>
 										<li>
@@ -66,8 +61,8 @@
 											</a>
 										</li>
 										<li>
-											<a href="<?= base_url('laporan-peminjaman'); ?>">
-												<i class="fa fa-caret-right"></i>Laporan Peminjaman
+											<a href="<?= base_url('laporan-permintaan'); ?>">
+												<i class="fa fa-caret-right"></i>Laporan permintaan
 											</a>
 										</li>
 									</ul>
@@ -82,8 +77,8 @@
 											</a>
 										</li>
 										<li>
-											<a href="<?= base_url('peminjaman'); ?>">
-												<i class="fa fa-caret-right"></i>Peminjaman
+											<a href="<?= base_url('permintaan'); ?>">
+												<i class="fa fa-caret-right"></i>Permintaan
 											</a>
 										</li>
 										<li>
@@ -97,8 +92,8 @@
 											</a>
 										</li>
 										<li>
-											<a href="<?= base_url('laporan-peminjaman'); ?>">
-												<i class="fa fa-caret-right"></i>Laporan Peminjaman
+											<a href="<?= base_url('laporan-permintaan'); ?>">
+												<i class="fa fa-caret-right"></i>Laporan permintaan
 											</a>
 										</li>
 									</ul>
@@ -113,8 +108,8 @@
 											</a>
 										</li>
 										<li>
-											<a href="<?= base_url('peminjaman'); ?>">
-												<i class="fa fa-caret-right"></i>Peminjaman
+											<a href="<?= base_url('permintaan'); ?>">
+												<i class="fa fa-caret-right"></i>Permintaan
 											</a>
 										</li>
 										<li>
@@ -128,8 +123,8 @@
 											</a>
 										</li>
 										<li>
-											<a href="<?= base_url('laporan-peminjaman'); ?>">
-												<i class="fa fa-caret-right"></i>Laporan Peminjaman
+											<a href="<?= base_url('laporan-permintaan'); ?>">
+												<i class="fa fa-caret-right"></i>Laporan permintaan
 											</a>
 										</li>
 									</ul>

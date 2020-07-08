@@ -45,99 +45,113 @@ class Pembelian extends Render_Controller
     }
     public function accept_gudang($id)
     {
-        $data = $this->db->select('kepala_gudang_status,jumlah,kode_barang,manajer_status');
-        $data = $this->db->get_where('pembelian_detail', ['id_pembelian_detail' => $id])->row_array();
-        if ($data['kepala_gudang_status'] == 'Pending..') {
+        $data = $this->db->get_where('pembelian_detail', ['id_pembelian_detail' => $id]);
+        if ($data['kepala_gudang_status'] != 'Pending..') {
+            echo "<script>alert('Barang ini telah dikonfirmasi,tidak bisa mengkonfirmasi ulang')</script>";
+            redirect('pembelian', 'refresh');
+        } else {
             $this->db->set('kepala_gudang', $this->session->userdata('nip'));
             $this->db->set('kepala_gudang_status', 'accepted');
             $this->db->where('id_pembelian_detail', $id);
             $query = $this->db->update('pembelian_detail');
             if ($query) {
-                echo "<script>alert('Permintaan telah diterima')</script>";
+                echo "<script>alert('pembelian telah diterima')</script>";
                 redirect('pembelian', 'refresh');
             }
-        } else {
-            if (empty($data['manajer_status'])) {
-                echo "<script>alert('Harap menunggu konfirmasi dari manajer terlebih dahulu')</script>";
-                redirect('pembelian', 'refresh');
-            } else {
-                $this->db->select('stok');
-                $barang = $this->db->get_where('barang', ['kode_barang' => $data['kode_barang']])->row_array();
-                $this->db->set('kepala_gudang2', $this->session->userdata('nip'));
-                $this->db->set('kepala_gudang2_status', 'accepted');
-                $this->db->where('id_pembelian_detail', $id);
-                $query = $this->db->update('pembelian_detail');
-                if ($data['manajer_status'] == 'accepted') {
-                    $this->db->set('stok', ((int) $barang['stok'] + $data['jumlah']));
-                    $this->db->where('kode_barang', $data['kode_barang']);
-                    $stok = $this->db->update('barang');
-                    $this->db->set('status', 'accepted');
-                    $this->db->where('id_pembelian', $id);
-                    $status = $this->db->update('pembelian');
-                }
-                if ($query) {
-                    echo "<script>alert('Permintaan telah diterima')</script>";
-                    redirect('pembelian', 'refresh');
-                }
-            }
-        }
-
-        if ($query) {
-            echo "<script>alert('Permintaan telah diterima')</script>";
-            redirect('pembelian', 'refresh');
         }
     }
     public function reject_gudang($id)
     {
-        $this->db->select('kepala_gudang_status,manajer_status');
-        $data = $this->db->get_where('pembelian_detail', ['id_pembelian_detail' => $id])->row_array();
+        $data = $this->db->get_where('pembelian_detail', ['id_pembelian_detail' => $id]);
         if ($data['kepala_gudang_status'] != 'Pending..') {
-            if ($data['manajer_status'] != 'Pending..') {
-                $this->db->set('kepala_gudang2', $this->session->userdata('nip'));
-                $this->db->set('kepala_gudang2_status', 'rejected');
-                $this->db->where('id_pembelian_detail', $id);
-                $query = $this->db->update('pembelian_detail');
-                $this->db->set('status', 'rejected');
-                $this->db->where('id_pembelian', $id);
-                $status = $this->db->update('pembelian');;
-            } else {
-                echo "<script>alert('Harap menunggu konfirmasi Manager')</script>";
-                redirect('pembelian', 'refresh');
-            }
+            echo "<script>alert('Barang ini telah dikonfirmasi,tidak bisa mengkonfirmasi ulang')</script>";
+            redirect('pembelian', 'refresh');
         } else {
             $this->db->set('kepala_gudang', $this->session->userdata('nip'));
             $this->db->set('kepala_gudang_status', 'rejected');
             $this->db->where('id_pembelian_detail', $id);
             $query = $this->db->update('pembelian_detail');
-        }
-        if ($query) {
-            echo "<script>alert('Permintaan telah ditolak')</script>";
-            redirect('pembelian', 'refresh');
+            if ($query) {
+                echo "<script>alert('pembelian telah ditolak')</script>";
+                redirect('pembelian', 'refresh');
+            }
         }
     }
     public function accept_manajer($id)
     {
-        $this->db->set('manajer', $this->session->userdata('nip'));
-        $this->db->set('manajer_status', 'accepted');
-        $this->db->where('id_pembelian_detail', $id);
-        $query = $this->db->update('pembelian_detail');
-        if ($query) {
-            echo "<script>alert('Permintaan telah diterima')</script>";
-            redirect('pembelian', 'refresh');
-        }
-        if ($query) {
-            echo "<script>alert('Permintaan telah diterima')</script>";
+        $data_pembelian = [
+            'status' => 'accepted',
+            'sort' => 1
+        ];
+        $data_detail = [
+            'manajer' => $this->session->userdata('nip'),
+            'manajer_status' => 'accepted',
+
+        ];
+        $query = $this->db->select('*');
+        $query = $this->db->from('pembelian_detail pd');
+        $query = $this->db->join('pembelian p', 'p.id_pembelian = pd.id_pembelian', 'left');
+        $query = $this->db->join('barang b', 'b.kode_barang = pd.kode_barang', 'left');
+        $query = $this->db->where('id_pembelian_detail', $id);
+        $data = $this->db->get()->row_array();
+        if ($data['kepala_gudang_status'] != 'Pending..') {
+            if ($data['manajer_status'] != 'Pending..') {
+                echo "<script>alert('Barang ini telah dikonfirmasi,tidak bisa mengkonfirmasi ulang')</script>";
+                redirect('pembelian', 'refresh');
+            } else {
+                $query = $this->db->where('id_pembelian', $id);
+                $query = $this->db->update('pembelian', $data_pembelian);
+
+                $query = $this->db->where('id_pembelian_detail', $data['id_pembelian_detail']);
+                $query = $this->db->update('pembelian_detail', $data_detail);
+                $data_barang = [
+                    'stok' => ($data['stok'] + $data['jumlah'])
+                ];
+                $query = $this->db->where('kode_barang', $data['kode_barang']);
+                $query = $this->db->update('barang', $data_barang);
+
+                if ($query) {
+                    echo "<script>alert('pembelian telah diterima')</script>";
+                    redirect('pembelian', 'refresh');
+                }
+            }
+        } else {
+            echo "<script>alert('Harap Tunggu konfirmasi dari kepala gudang')</script>";
             redirect('pembelian', 'refresh');
         }
     }
     public function reject_manajer($id)
     {
-        $this->db->set('manajer', $this->session->userdata('nip'));
-        $this->db->set('manajer_status', 'rejected');
-        $this->db->where('id_pembelian_detail', $id);
-        $query = $this->db->update('pembelian_detail');
-        if ($query) {
-            echo "<script>alert('Permintaan telah ditolak')</script>";
+        $data_pembelian = [
+            'status' => 'rejected'
+        ];
+        $data_detail = [
+            'manajer' => $this->session->userdata('nip'),
+            'manajer_status' => 'rejected'
+        ];
+        $query = $this->db->select('*');
+        $query = $this->db->from('pembelian_detail pd');
+        $query = $this->db->join('pembelian p', 'p.id_pembelian = pd.id_pembelian', 'left');
+        $query = $this->db->where('id_pembelian_detail', $id);
+        $data = $this->db->get()->row_array();
+        if ($data['kepala_gudang_status'] != 'Pending..') {
+
+            if ($data['manajer_status'] != 'Pending..') {
+                echo "<script>alert('Barang ini telah dikonfirmasi,tidak bisa mengkonfirmasi ulang')</script>";
+                redirect('pembelian', 'refresh');
+            } else {
+                $query = $this->db->where('id_pembelian', $id);
+                $query = $this->db->update('pembelian', $data_pembelian);
+                $query = $this->db->where('id_pembelian_detail', $data['id_pembelian_detail']);
+                $query = $this->db->update('pembelian_detail', $data_detail);
+
+                if ($query) {
+                    echo "<script>alert('pembelian telah ditolak')</script>";
+                    redirect('pembelian', 'refresh');
+                }
+            }
+        } else {
+            echo "<script>alert('harap menunggu konfirmasi dari kepala gudang')</script>";
             redirect('pembelian', 'refresh');
         }
     }

@@ -66,22 +66,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="gudang">Gudang</label>
-                                                <select name="gudang" class="form-control">
-                                                    <?php foreach ($gudang as $g) : ?>
-                                                        <?php if ($g['id_gudang'] == $dataID['id_gudang']) : ?>
-                                                            <option selected value="<?= $g['id_gudang']; ?>"><?= $g['nama']; ?></option>
-                                                        <?php else : ?>
-                                                            <option value="<?= $g['id_gudang']; ?>"><?= $g['nama']; ?></option>
-                                                        <?php endif; ?>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <button type="submit" class="btn btn-default btn-border">Simpan</button>
                                 </form>
                             </div>

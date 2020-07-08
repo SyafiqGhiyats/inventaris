@@ -13,7 +13,6 @@ class Rak extends Render_Controller
         $this->navigation = ['Dashboard'];
         $this->plugins = [];
         $this->data['data'] = $this->model->get();
-        $this->data['gudang'] = $this->db->get('gudang')->result_array();
         $this->content = 'rak';
         $this->render();
     }
@@ -23,7 +22,6 @@ class Rak extends Render_Controller
         $this->navigation = ['Dashboard'];
         $this->plugins = [];
         $this->data['dataID'] = $this->model->getById($id);
-        $this->data['gudang'] = $this->db->get('gudang')->result_array();
         $this->content = 'rak_ubah';
         $this->render();
     }
@@ -33,7 +31,6 @@ class Rak extends Render_Controller
         $gudang = $this->input->post('gudang');
         $nama = $this->input->post('nama');
         $data['nama'] = $nama;
-        $data['id_gudang'] = $gudang;
         if (empty($id)) {
             $query = $this->model->insert($data);
             if ($query) {
