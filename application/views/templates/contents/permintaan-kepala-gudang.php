@@ -91,10 +91,13 @@
                                         <td><?= $d['manajer_status']; ?></td>
                                         <td><?= $d['tanggal']; ?></td>
                                         <td>
-                                            <div class="text-center">
-                                                <a href="<?= base_url('permintaan/accept_gudang/') . $d['id_permintaan'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-check"></i> <span>Accept</span></a>
-                                                <a href="<?= base_url('permintaan/reject_gudang/') . $d['id_permintaan'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button"><i class="fa fa-ban"></i> <span>Reject</span></a>
-                                            </div>
+                                            <?php if ($d['kepala_gudang'] == '') : ?>
+                                                <div class="text-center">
+                                                    <a href="<?= base_url('permintaan/accept_gudang/') . $d['id_permintaan'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-check"></i> <span>Accept</span></a>
+                                                    <a href="<?= base_url('permintaan/reject_gudang/') . $d['id_permintaan'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button"><i class="fa fa-ban"></i> <span>Reject</span></a>
+                                                </div>
+                                            <?php else : ?>
+                                            <?php endif; ?>
                                         </td>
 
                                     </tr>

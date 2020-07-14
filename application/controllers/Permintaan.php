@@ -65,7 +65,7 @@ class Permintaan extends Render_Controller
         $this->db->where('id_permintaan_detail', $id);
         $query = $this->db->update('permintaan_detail');
         if ($query) {
-            echo "<script>alert('Permintaan telah diterima')</script>";
+            echo "<script>alert('Permintaan telah diterima, Silahkan tunggu konfirmasi dari Manager')</script>";
             redirect('permintaan', 'refresh');
         }
     }
@@ -164,6 +164,7 @@ class Permintaan extends Render_Controller
         $keterangan = $this->input->post('keterangan', true);
         $jumlah = $this->input->post('jumlah', true);
         $barang = $this->input->post('barang', true);
+        $stok = $this->db->get_where('barang', ['kode_barang' => $barang])->row_array();
         $data_pinjam = [
             'nip' => $nip,
             'keterangan' => $keterangan,
@@ -176,17 +177,21 @@ class Permintaan extends Render_Controller
             'kepala_gudang_status' => 'Pending..',
             'manajer_status' => 'Pending..'
         ];
-
         if (empty($id)) {
-            $query = $this->model->insert($data_pinjam, $data_detail);
-            if ($query) {
-                echo "<script>alert('Berhasil Ditambahkan')</script>";
+            if ((int) $jumlah > (int) $stok['stok']) {
+                echo "<script>alert('Jumlah tidak bisa melebihi Stok')</script>";
                 redirect('permintaan', 'refresh');
+            } else {
+                $query = $this->model->insert($data_pinjam, $data_detail);
+                if ($query) {
+                    echo "<script>alert('Berhasil Ditambahkan. Silahkan tunggu konfirmasi dari kepala gudang dan manager')</script>";
+                    redirect('permintaan', 'refresh');
+                }
             }
         } else {
             $query = $this->model->update($id);
             if ($query) {
-                echo "<script>alert('Berhasil Diubah')</script>";
+                echo "<script>alert('Berhasil Diubah. Silahkan tunggu konfirmasi dari kepala gudang dan manager')</script>";
                 redirect('permintaan', 'refresh');
             }
         }

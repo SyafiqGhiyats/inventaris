@@ -80,7 +80,7 @@
                                 <tbody>
                                     <tr>
                                         <td><?= $d['nip']; ?></td>
-                                        <td><?= $d['kode_barang']; ?></td>
+                                        <td style="cursor:pointer;" data-options="splash-2 splash-ef-14" data-toggle="modal" data-target="#modal-barang" class="popup-gambar" data-kode="<?= $d['kode_barang']; ?>"><?= $d['kode_barang']; ?></td>
                                         <td><?= $d['keterangan']; ?></td>
                                         <td><?= $d['status']; ?></td>
                                         <td><?= $d['jumlah']; ?></td>
@@ -116,3 +116,54 @@
     </div>
 
 </section>
+<div class="modal splash fade" id="modal-barang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title custom-font" id="myModalLabel">Form Permintaan</h3>
+            </div>
+            <div class="modal-body">
+            </div>
+            <hr>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-simpan btn-default btn-border">Simpan</button>
+                <button class="btn btn-close btn-default btn-border" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        $('.popup-gambar').on('click', function() {
+            kode = $(this).data('kode');
+            $.ajax({
+                url: '<?= base_url() ?>barang/detail/' + kode,
+                dataType: 'JSON',
+                type: 'GET',
+                success(data) {
+                    harga = parseInt(data.harga).toLocaleString();
+                    $('#modal-barang .modal-title').text('Detail Barang')
+                    $('#modal-barang .modal-body').html(`
+                    <h2 class="text-uppercase text-center mt-0">${data.nama}</h2>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <img style="width: 300px;" src="<?= base_url('gambar/'); ?>${data.gambar}" alt="">
+                            </div>
+                        </div>
+                                <h4><strong>Rp ${harga}</strong></h4>
+                            <h4><p>Stok : ${data.stok}</p></h4>
+                            <h3 class="text-center">Keterangan</h3>
+                            <h4 class="text-justify" style="padding:0 3rem;"><strong>${data.keterangan}</strong></h4>
+                            <h4>
+                                <p class="text-right">
+                                    ${data.tanggal}
+                                </p>
+                            </h4>
+                    `)
+                    $('.btn-simpan').hide()
+                    $('.btn-close').text('Close')
+                }
+            })
+        })
+    });
+</script>

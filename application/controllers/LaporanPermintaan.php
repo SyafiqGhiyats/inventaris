@@ -26,7 +26,11 @@ class LaporanPermintaan extends Render_Controller
         } elseif ($this->input->get('filter') == 'last-month') {
             $this->data['data'] = $this->model->last_month();
         } else {
-            $this->data['data'] = $this->model->get();
+            if($this->session->userdata('level') == 'teknisi'){
+                $this->data['data'] = $this->model->get($this->session->userdata('nip'));
+            }else{                
+                $this->data['data'] = $this->model->get();
+            }
         }
         $this->content = 'laporan-permintaan';
         $this->render();
@@ -49,9 +53,15 @@ class LaporanPermintaan extends Render_Controller
         } elseif ($this->input->get('filter') == 'last-month') {
             $data['records'] = $this->model->last_month();
         } else {
-            $data['records'] = $this->model->get();
+            if($this->session->userdata('level') == 'teknisi'){
+                $this->data['records'] = $this->model->get($this->session->userdata('nip'));
+            }else{                
+                $this->data['records'] = $this->model->get();
+            }
         }
 
+        // var_dump($this->data);
+        // exit();
         // Config PDF
         $config['html'] = 'templates/cetak/laporan-permintaan';
         $config['data'] = $data;

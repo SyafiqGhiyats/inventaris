@@ -59,7 +59,10 @@
                                 <div id="tableTools"></div>
                             </div>
                             <div class="col-md-6">
-                                <button id="clickTambah" style="float: right;" class="btn btn-ef btn-ef-5 btn-ef-5b btn-success mb-10" data-toggle="modal" data-target="#splash" data-options="splash-2 splash-ef-14"><i class="fa fa-plus"></i> <span>Tambah</span></button>
+                                <?php if ($this->session->userdata('id_level') != 3) : ?>
+                                    <button id="clickTambah" style="float: right;" class="btn btn-ef btn-ef-5 btn-ef-5b btn-success mb-10" data-toggle="modal" data-target="#splash" data-options="splash-2 splash-ef-14"><i class="fa fa-plus"></i> <span>Tambah</span></button>
+                                <?php else : ?>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <br>
@@ -84,14 +87,17 @@
                                             <td><?= $d['id_rak']; ?></td>
                                             <td><?= $d['nama']; ?></td>
                                             <td><?= $d['keterangan']; ?></td>
-                                            <td><?= $d['gambar']; ?></td>
+                                            <td style="cursor:pointer;" data-options="splash-2 splash-ef-14" data-toggle="modal" data-target="#modal-barang" class="popup-gambar" data-kode="<?= $d['kode_barang']; ?>"><?= $d['gambar']; ?></td>
                                             <td><?= $d['stok']; ?></td>
                                             <td><?= $d['tanggal']; ?></td>
                                             <td>
-                                                <div class="pull-right">
-                                                    <a href="<?= base_url('barang/ubah/') . $d['kode_barang'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-edit"></i> <span>Ubah</span></a>
-                                                    <a href="<?= base_url('barang/hapus/') . $d['kode_barang'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button" value="'+data+'"><i class="fa fa-trash"></i> <span>Hapus</span></a>
-                                                </div>
+                                                <?php if ($this->session->userdata('id_level') != 3) : ?>
+                                                    <div class="pull-right">
+                                                        <a href="<?= base_url('barang/ubah/') . $d['kode_barang'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-edit"></i> <span>Ubah</span></a>
+                                                        <a href="<?= base_url('barang/hapus/') . $d['kode_barang'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button" value="'+data+'"><i class="fa fa-trash"></i> <span>Hapus</span></a>
+                                                    </div>
+                                                <?php else : ?>
+                                                <?php endif; ?>
                                             </td>
 
                                         </tr>
@@ -175,3 +181,39 @@
         </div>
     </div>
 </div>
+<div class="modal splash fade" id="modal-barang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title custom-font" id="myModalLabel">Form Permintaan</h3>
+            </div>
+            <div class="modal-body">
+            </div>
+            <hr>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-simpan btn-default btn-border">Simpan</button>
+                <button class="btn btn-close btn-default btn-border" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        $('.popup-gambar').on('click', function() {
+            kode = $(this).data('kode');
+            $.ajax({
+                url: '<?= base_url() ?>barang/detail/' + kode,
+                dataType: 'JSON',
+                type: 'GET',
+                success(data) {
+                    $('#modal-barang .modal-title').text('Gambar Barang')
+                    $('#modal-barang .modal-body').html(`
+                   <img style="width:100%;" src="<?= base_url('gambar/') ?>${data.gambar}" alt="">
+                    `)
+                    $('.btn-simpan').hide()
+                    $('.btn-close').text('Close')
+                }
+            })
+        })
+    });
+</script>

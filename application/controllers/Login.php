@@ -36,6 +36,7 @@ class Login extends Render_Controller
 					'status' => true,
 					'id_level' => $login['id_level'],
 					'nama' => $login['nama'],
+					'level' => $this->db->get_where('level',array('id_level' => $login['id_level']))->row_array()['nama'],
 					'nip' => $login['nip']
 				];
 				$this->session->set_userdata($data);

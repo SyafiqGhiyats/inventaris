@@ -6,8 +6,6 @@
 <html class="no-js" lang="">
 <!--<![endif]-->
 
-
-
 <head>
 
     <meta charset="utf-8">

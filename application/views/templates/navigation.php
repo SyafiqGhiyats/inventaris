@@ -17,7 +17,7 @@
 						<ul id="navigation">
 							<?php if ($this->session->userdata('id_level') == 1) : ?>
 								<li>
-									<a href="#"><i class="fa fa-caret-right"></i>Teknisi</a>
+									<a href="#"><i class="fa fa-caret-right"></i>Menu</a>
 									<ul>
 										<li>
 											<a href="<?= base_url('permintaan'); ?>">
@@ -33,7 +33,7 @@
 								</li>
 							<?php elseif ($this->session->userdata('id_level') == 2) : ?>
 								<li>
-									<a href="#"><i class="fa fa-caret-right"></i>Petugas Gudang</a>
+									<a href="#"><i class="fa fa-caret-right"></i>Menu</a>
 									<ul>
 										<li>
 											<a href="<?= base_url('barang'); ?>">
@@ -69,7 +69,7 @@
 								</li>
 							<?php elseif ($this->session->userdata('id_level') == 3) : ?>
 								<li>
-									<a href="#"><i class="fa fa-caret-right"></i>Kepala Gudang</a>
+									<a href="#"><i class="fa fa-caret-right"></i>Menu</a>
 									<ul>
 										<li>
 											<a href="<?= base_url('barang'); ?>">
@@ -100,13 +100,8 @@
 								</li>
 							<?php elseif ($this->session->userdata('id_level') == 4) : ?>
 								<li>
-									<a href=""><i class="fa fa-caret-right"></i>Manajer</a>
+									<a href=""><i class="fa fa-caret-right"></i>Menu</a>
 									<ul>
-										<li>
-											<a href="<?= base_url('barang'); ?>">
-												<i class="fa fa-caret-right"></i>Barang
-											</a>
-										</li>
 										<li>
 											<a href="<?= base_url('permintaan'); ?>">
 												<i class="fa fa-caret-right"></i>Permintaan

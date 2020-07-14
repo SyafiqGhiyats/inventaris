@@ -3,11 +3,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class LaporanPermintaanModel extends CI_Model
 {
-    public function get()
+    public function get($nip=null)
     {
-        $query = $this->db->join('permintaan_detail a', 'a.id_permintaan_detail = b.id_permintaan')
-        ->order_by('sort', 'ASC')
-            ->get('permintaan b')->result_array();
+        if($nip != null){
+            $where = array('nip' => $nip);
+        }else{
+            $where = array();
+        }
+        $query = $this->db->join('permintaan_detail a', 'a.id_permintaan_detail = b.id_permintaan')->order_by('sort', 'ASC')->where($where)->get('permintaan b')->result_array();
         return $query;
     }
     public function filter_accept()

@@ -45,14 +45,14 @@ class Pembelian extends Render_Controller
     }
     public function accept_gudang($id)
     {
-        $data = $this->db->get_where('pembelian_detail', ['id_pembelian_detail' => $id]);
+        $data = $this->db->get_where('pembelian_detail', ['id_pembelian' => $id])->row_array();
         if ($data['kepala_gudang_status'] != 'Pending..') {
             echo "<script>alert('Barang ini telah dikonfirmasi,tidak bisa mengkonfirmasi ulang')</script>";
             redirect('pembelian', 'refresh');
         } else {
             $this->db->set('kepala_gudang', $this->session->userdata('nip'));
             $this->db->set('kepala_gudang_status', 'accepted');
-            $this->db->where('id_pembelian_detail', $id);
+            $this->db->where('id_pembelian', $id);
             $query = $this->db->update('pembelian_detail');
             if ($query) {
                 echo "<script>alert('pembelian telah diterima')</script>";
@@ -92,7 +92,7 @@ class Pembelian extends Render_Controller
         $query = $this->db->from('pembelian_detail pd');
         $query = $this->db->join('pembelian p', 'p.id_pembelian = pd.id_pembelian', 'left');
         $query = $this->db->join('barang b', 'b.kode_barang = pd.kode_barang', 'left');
-        $query = $this->db->where('id_pembelian_detail', $id);
+        $query = $this->db->where('p.id_pembelian', $id);
         $data = $this->db->get()->row_array();
         if ($data['kepala_gudang_status'] != 'Pending..') {
             if ($data['manajer_status'] != 'Pending..') {
@@ -132,7 +132,7 @@ class Pembelian extends Render_Controller
         $query = $this->db->select('*');
         $query = $this->db->from('pembelian_detail pd');
         $query = $this->db->join('pembelian p', 'p.id_pembelian = pd.id_pembelian', 'left');
-        $query = $this->db->where('id_pembelian_detail', $id);
+        $query = $this->db->where('p.id_pembelian', $id);
         $data = $this->db->get()->row_array();
         if ($data['kepala_gudang_status'] != 'Pending..') {
 
@@ -179,7 +179,7 @@ class Pembelian extends Render_Controller
         if (empty($id)) {
             $query = $this->model->insert($data_beli, $data_detail);
             if ($query) {
-                echo "<script>alert('Berhasil Ditambahkan')</script>";
+                echo "<script>alert('Berhasil Ditambahkan,Harap Menunggu Konfirmasi Dari Kepala Gudang dan Manager')</script>";
                 redirect('pembelian', 'refresh');
             }
         } else {

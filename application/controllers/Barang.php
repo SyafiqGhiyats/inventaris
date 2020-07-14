@@ -30,6 +30,11 @@ class Barang extends Render_Controller
             return $this->upload->data("file_name");
         }
     }
+    public function detail($id)
+    {
+        $data = $this->model->getById($id);
+        echo json_encode($data);
+    }
     public function kode()
     {
         $this->db->select('RIGHT(barang.kode_barang,2) as kode_barang', FALSE);
