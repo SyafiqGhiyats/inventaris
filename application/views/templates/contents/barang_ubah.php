@@ -1,22 +1,6 @@
 <section id="content">
     <div class="page page-tables-datatables">
 
-        <div class="pageheader">
-
-            <div class="page-bar">
-
-                <ul class="page-breadcrumb">
-                    <li>
-                        <a href="<?= base_url() ?>"><i class="fa fa-home"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="#">Level</a>
-                    </li>
-                </ul>
-
-            </div>
-
-        </div>
 
         <!-- row -->
         <div class="row">
@@ -31,24 +15,7 @@
                     <!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
                         <h1 class="custom-font">Data <strong><?= $title ?></strong></h1>
-                        <ul class="controls">
-                            <li class="dropdown">
 
-                                <a role="button" tabindex="0" class="dropdown-toggle settings" data-toggle="dropdown">
-                                    <i class="fa fa-cog"></i>
-                                    <i class="fa fa-spinner fa-spin"></i>
-                                </a>
-
-                                <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp">
-                                    <li>
-                                        <a role="button" tabindex="0" class="tile-toggle">
-                                            <span class="minimize"><i class="fa fa-angle-down"></i>&nbsp;&nbsp;&nbsp;Minimize</span>
-                                            <span class="expand"><i class="fa fa-angle-up"></i>&nbsp;&nbsp;&nbsp;Expand</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
                     </div>
                     <!-- /tile header -->
 
@@ -95,7 +62,13 @@
                                                 <input type="file" class="form-control" name="gambar" id="">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="">Stok Minimal</label>
+                                                <input type="number" value="<?= $dataID['stok_min']; ?>" class="form-control" required name="stok_min">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="">Stok</label>
                                                 <input type="number" value="<?= $dataID['stok']; ?>" class="form-control" required name="stok">

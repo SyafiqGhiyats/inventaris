@@ -2,26 +2,7 @@
 
 	<div class="page page-tables-datatables">
 
-		<div class="pageheader">
-
-			<div class="page-bar">
-
-				<ul class="page-breadcrumb">
-					<li>
-						<a href="<?=base_url()?>"><i class="fa fa-home"></i> Dashboard</a>
-					</li>
-					<li>
-						<a href="#">Pengaturan</a>
-					</li>
-					<li>
-						<a href="<?=base_url()?>pengaturan/level">Level</a>
-					</li>
-				</ul>
-
-			</div>
-
-		</div>
-
+		
 		<!-- row -->
 		<div class="row">
 			<!-- col -->

@@ -31,24 +31,7 @@
                     <!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
                         <h1 class="custom-font">Data <strong><?= $title ?></strong></h1>
-                        <ul class="controls">
-                            <li class="dropdown">
 
-                                <a role="button" tabindex="0" class="dropdown-toggle settings" data-toggle="dropdown">
-                                    <i class="fa fa-cog"></i>
-                                    <i class="fa fa-spinner fa-spin"></i>
-                                </a>
-
-                                <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp">
-                                    <li>
-                                        <a role="button" tabindex="0" class="tile-toggle">
-                                            <span class="minimize"><i class="fa fa-angle-down"></i>&nbsp;&nbsp;&nbsp;Minimize</span>
-                                            <span class="expand"><i class="fa fa-angle-up"></i>&nbsp;&nbsp;&nbsp;Expand</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
                     </div>
                     <!-- /tile header -->
 
@@ -59,20 +42,23 @@
                                 <div id="tableTools"></div>
                             </div>
                             <div class="col-md-6">
-                                <?php if (isset($data)) : ?>
-
-                                <?php else : ?>
-                                    <button id="clickTambah" style="float: right;" class="btn btn-ef btn-ef-5 btn-ef-5b btn-success mb-10" data-toggle="modal" data-target="#splash" data-options="splash-2 splash-ef-14"><i class="fa fa-plus"></i> <span>Tambah</span></button>
-                                <?php endif; ?>
+                                <button id="clickTambah" style="float: right;" class="btn btn-ef btn-ef-5 btn-ef-5b btn-success mb-10" data-toggle="modal" data-target="#splash" data-options="splash-2 splash-ef-14"><i class="fa fa-plus"></i> <span>Tambah</span></button>
                             </div>
                         </div>
                         <br>
+                        <style type="text/css">
+                            table .thead-dark th {
+                                color: #fff;
+                                background-color: #343a40;
+                                border-color: #454d55;
+                                vertical-align: middle !important;
+                            }
+                        </style>
                         <div class="table-responsive">
                             <table class="table table-custom" id="advanced-usage">
-                                <thead>
+                                <thead class="thead-dark">
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama gudang</th>
                                         <th>Nama</th>
                                         <th>Tanggal</th>
                                         <th style="text-align: right;">Pilihan &nbsp;&nbsp;</th>
@@ -88,6 +74,7 @@
                                             <td>
                                                 <div class="pull-right">
                                                     <a href="<?= base_url('rak/ubah/') . $d['id_rak'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-edit"></i> <span>Ubah</span></a>
+                                                    <a href="<?= base_url('rak/hapus/') . $d['id_rak'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b"><i class="fa fa-trash"></i> <span>Hapus</span></a>
                                                 </div>
                                             </td>
 
@@ -128,16 +115,6 @@
                             <div class="form-group">
                                 <label for="tanggal">Nama</label>
                                 <input type="text" id="nama" class="form-control" name="nama" required="required" />
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="Gudang">Gudang</label>
-                                <select name="gudang" class="form-control">
-                                    <?php foreach ($gudang as $g) : ?>
-                                        <option value="<?= $g['id_gudang']; ?>"><?= $g['nama']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
                             </div>
                         </div>
                     </div>

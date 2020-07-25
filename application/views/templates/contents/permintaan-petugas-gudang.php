@@ -31,24 +31,7 @@
                     <!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
                         <h1 class="custom-font">Data <strong class="text-capitalize"><?= str_replace('-', ' ', $title) ?></strong></h1>
-                        <ul class="controls">
-                            <li class="dropdown">
 
-                                <a role="button" tabindex="0" class="dropdown-toggle settings" data-toggle="dropdown">
-                                    <i class="fa fa-cog"></i>
-                                    <i class="fa fa-spinner fa-spin"></i>
-                                </a>
-
-                                <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp">
-                                    <li>
-                                        <a role="button" tabindex="0" class="tile-toggle">
-                                            <span class="minimize"><i class="fa fa-angle-down"></i>&nbsp;&nbsp;&nbsp;Minimize</span>
-                                            <span class="expand"><i class="fa fa-angle-up"></i>&nbsp;&nbsp;&nbsp;Expand</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
                     </div>
                     <!-- /tile header -->
 
@@ -60,8 +43,16 @@
                             </div>
                         </div>
                         <br>
+                        <style type="text/css">
+                            table .thead-dark th {
+                                color: #fff;
+                                background-color: #343a40;
+                                border-color: #454d55;
+                                vertical-align: middle !important;
+                            }
+                        </style>
                         <table class="table table-custom" id="advanced-usage">
-                            <thead>
+                            <thead class="thead-dark">
                                 <tr>
                                     <th>NIP</th>
                                     <th>Kode Barang</th>

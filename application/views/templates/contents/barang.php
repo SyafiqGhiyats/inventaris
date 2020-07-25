@@ -1,22 +1,6 @@
 <section id="content">
     <div class="page page-tables-datatables">
 
-        <div class="pageheader">
-
-            <div class="page-bar">
-
-                <ul class="page-breadcrumb">
-                    <li>
-                        <a href="<?= base_url() ?>"><i class="fa fa-home"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="#">Barang</a>
-                    </li>
-                </ul>
-
-            </div>
-
-        </div>
 
         <!-- row -->
         <div class="row">
@@ -31,24 +15,7 @@
                     <!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
                         <h1 class="custom-font">Data <strong><?= $title ?></strong></h1>
-                        <ul class="controls">
-                            <li class="dropdown">
 
-                                <a role="button" tabindex="0" class="dropdown-toggle settings" data-toggle="dropdown">
-                                    <i class="fa fa-cog"></i>
-                                    <i class="fa fa-spinner fa-spin"></i>
-                                </a>
-
-                                <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp">
-                                    <li>
-                                        <a role="button" tabindex="0" class="tile-toggle">
-                                            <span class="minimize"><i class="fa fa-angle-down"></i>&nbsp;&nbsp;&nbsp;Minimize</span>
-                                            <span class="expand"><i class="fa fa-angle-up"></i>&nbsp;&nbsp;&nbsp;Expand</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
                     </div>
                     <!-- /tile header -->
 
@@ -66,15 +33,24 @@
                             </div>
                         </div>
                         <br>
+                        <style type="text/css">
+                            table .thead-dark th {
+                                color: #fff;
+                                background-color: #343a40;
+                                border-color: #454d55;
+                                vertical-align: middle !important;
+                            }
+                        </style>
                         <div class="table-responsive">
                             <table class="table table-custom" id="advanced-usage">
-                                <thead>
+                                <thead class="thead-dark">
                                     <tr>
                                         <th>Kode Barang</th>
                                         <th>ID Rak</th>
                                         <th>Nama</th>
                                         <th>Keterangan</th>
                                         <th>Gambar</th>
+                                        <th>Stok Minimal</th>
                                         <th>Stok</th>
                                         <th>Tanggal</th>
                                         <th style="text-align: right;">Pilihan &nbsp;&nbsp;</th>
@@ -87,7 +63,8 @@
                                             <td><?= $d['id_rak']; ?></td>
                                             <td><?= $d['nama']; ?></td>
                                             <td><?= $d['keterangan']; ?></td>
-                                            <td style="cursor:pointer;" data-options="splash-2 splash-ef-14" data-toggle="modal" data-target="#modal-barang" class="popup-gambar" data-kode="<?= $d['kode_barang']; ?>"><?= $d['gambar']; ?></td>
+                                            <td><?= $d['gambar']; ?></td>
+                                            <td><?= $d['stok_min']; ?></td>
                                             <td><?= $d['stok']; ?></td>
                                             <td><?= $d['tanggal']; ?></td>
                                             <td>
@@ -95,8 +72,10 @@
                                                     <div class="pull-right">
                                                         <a href="<?= base_url('barang/ubah/') . $d['kode_barang'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-edit"></i> <span>Ubah</span></a>
                                                         <a href="<?= base_url('barang/hapus/') . $d['kode_barang'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button" value="'+data+'"><i class="fa fa-trash"></i> <span>Hapus</span></a>
+                                                        <button data-options="splash-2 splash-ef-14" data-toggle="modal" data-target="#modal-barang" class="btn btn-sm btn-success btn-ef btn-ef-5 btn-ef-5b popup-gambar" data-kode="<?= $d['kode_barang']; ?>"><i class="fa fa-eye"></i> <span>Detail</span></button>
                                                     </div>
                                                 <?php else : ?>
+                                                    <button data-options="splash-2 splash-ef-14" data-toggle="modal" data-target="#modal-barang" class="btn btn-sm btn-success btn-ef btn-ef-5 btn-ef-5b popup-gambar" data-kode="<?= $d['kode_barang']; ?>"><i class="fa fa-eye"></i> <span>Detail</span></button>
                                                 <?php endif; ?>
                                             </td>
 
@@ -164,7 +143,13 @@
                                 <input type="file" required class="form-control" name="gambar" id="">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="">Stok Minimal</label>
+                                <input type="number" class="form-control" required name="stok_min">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">Stok</label>
                                 <input type="number" class="form-control" required name="stok">

@@ -30,24 +30,7 @@
                     <!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
                         <h1 class="custom-font">Data <strong class="text-capitalize"><?= str_replace('-', ' ', $title) ?></strong></h1>
-                        <ul class="controls">
-                            <li class="dropdown">
 
-                                <a role="button" tabindex="0" class="dropdown-toggle settings" data-toggle="dropdown">
-                                    <i class="fa fa-cog"></i>
-                                    <i class="fa fa-spinner fa-spin"></i>
-                                </a>
-
-                                <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp">
-                                    <li>
-                                        <a role="button" tabindex="0" class="tile-toggle">
-                                            <span class="minimize"><i class="fa fa-angle-down"></i>&nbsp;&nbsp;&nbsp;Minimize</span>
-                                            <span class="expand"><i class="fa fa-angle-up"></i>&nbsp;&nbsp;&nbsp;Expand</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
                     </div>
                     <!-- /tile header -->
 
@@ -59,8 +42,16 @@
                             </div>
                         </div>
                         <br>
+                        <style type="text/css">
+                            table .thead-dark th {
+                                color: #fff;
+                                background-color: #343a40;
+                                border-color: #454d55;
+                                vertical-align: middle !important;
+                            }
+                        </style>
                         <table class="table table-custom" id="advanced-usage">
-                            <thead>
+                            <thead class="thead-dark">
                                 <tr>
                                     <th>NIP</th>
                                     <th>Kode Barang</th>
@@ -91,8 +82,13 @@
                                         <td><?= $d['tanggal']; ?></td>
                                         <td>
                                             <div class="text-center">
-                                                <a href="<?= base_url('permintaan/accept_manajer/') . $d['id_permintaan'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-check"></i> <span>Accept</span></a>
-                                                <a href="<?= base_url('permintaan/reject_manajer/') . $d['id_permintaan'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button"><i class="fa fa-ban"></i> <span>Reject</span></a>
+                                                <?php if ($d['manajer_status'] == 'accepted' or $d['manajer_status'] == 'rejected') : ?>
+                                                    <button data-options="splash-2 splash-ef-14" data-toggle="modal" data-target="#modal-barang" class="btn btn-sm btn-success btn-ef btn-ef-5 btn-ef-5b popup-gambar" data-kode="<?= $d['kode_barang']; ?>"><i class="fa fa-eye"></i> <span>Detail</span></button>
+                                                <?php else : ?>
+                                                    <a href="<?= base_url('permintaan/accept_manajer/') . $d['id_permintaan'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-check"></i> <span>Accept</span></a>
+                                                    <a href="<?= base_url('permintaan/reject_manajer/') . $d['id_permintaan'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button"><i class="fa fa-ban"></i> <span>Reject</span></a>
+                                                    <button data-options="splash-2 splash-ef-14" data-toggle="modal" data-target="#modal-barang" class="btn btn-sm btn-success btn-ef btn-ef-5 btn-ef-5b popup-gambar" data-kode="<?= $d['kode_barang']; ?>"><i class="fa fa-eye"></i> <span>Detail</span></button>
+                                                <?php endif; ?>
                                             </div>
                                         </td>
 

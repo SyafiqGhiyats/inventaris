@@ -26,9 +26,9 @@ class LaporanPermintaan extends Render_Controller
         } elseif ($this->input->get('filter') == 'last-month') {
             $this->data['data'] = $this->model->last_month();
         } else {
-            if($this->session->userdata('level') == 'teknisi'){
+            if ($this->session->userdata('level') == 'teknisi') {
                 $this->data['data'] = $this->model->get($this->session->userdata('nip'));
-            }else{                
+            } else {
                 $this->data['data'] = $this->model->get();
             }
         }
@@ -38,6 +38,7 @@ class LaporanPermintaan extends Render_Controller
 
     public function cetak()
     {
+
         if ($this->input->get('filter') == 'accepted') {
             $data['records'] = $this->model->filter_accept();
         } elseif ($this->input->get('filter') == 'rejected') {
@@ -53,10 +54,10 @@ class LaporanPermintaan extends Render_Controller
         } elseif ($this->input->get('filter') == 'last-month') {
             $data['records'] = $this->model->last_month();
         } else {
-            if($this->session->userdata('level') == 'teknisi'){
-                $this->data['records'] = $this->model->get($this->session->userdata('nip'));
-            }else{                
-                $this->data['records'] = $this->model->get();
+            if ($this->session->userdata('level') == 'teknisi') {
+                $data['records'] = $this->model->get($this->session->userdata('nip'));
+            } else {
+                $data['records'] = $this->model->get();
             }
         }
 

@@ -1,22 +1,6 @@
 <section id="content">
     <div class="page page-tables-datatables">
 
-        <div class="pageheader">
-
-            <div class="page-bar">
-
-                <ul class="page-breadcrumb">
-                    <li>
-                        <a href="<?= base_url() ?>"><i class="fa fa-home"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="#">Pembelian</a>
-                    </li>
-                </ul>
-
-            </div>
-
-        </div>
 
         <!-- row -->
         <div class="row">
@@ -31,24 +15,7 @@
                     <!-- tile header -->
                     <div class="tile-header dvd dvd-btm">
                         <h1 class="custom-font">Data <strong class="text-capitalize"><?= str_replace('-', ' ', $title) ?></strong></h1>
-                        <ul class="controls">
-                            <li class="dropdown">
 
-                                <a role="button" tabindex="0" class="dropdown-toggle settings" data-toggle="dropdown">
-                                    <i class="fa fa-cog"></i>
-                                    <i class="fa fa-spinner fa-spin"></i>
-                                </a>
-
-                                <ul class="dropdown-menu pull-right with-arrow animated littleFadeInUp">
-                                    <li>
-                                        <a role="button" tabindex="0" class="tile-toggle">
-                                            <span class="minimize"><i class="fa fa-angle-down"></i>&nbsp;&nbsp;&nbsp;Minimize</span>
-                                            <span class="expand"><i class="fa fa-angle-up"></i>&nbsp;&nbsp;&nbsp;Expand</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
                     </div>
                     <!-- /tile header -->
 
@@ -63,15 +30,23 @@
                             </div>
                         </div>
                         <br>
+                        <style type="text/css">
+                            table .thead-dark th {
+                                color: #fff;
+                                background-color: #343a40;
+                                border-color: #454d55;
+                                vertical-align: middle !important;
+                            }
+                        </style>
                         <table class="table table-custom table-responsive" id="advanced-usage">
-                            <thead>
+                            <thead class="thead-dark">
                                 <tr>
                                     <th>NIP</th>
                                     <th>Kode Barang</th>
                                     <th>Keterangan</th>
                                     <th>Status</th>
                                     <th>Jumlah</th>
-                                    <th>Total Harga</th>
+                                    <!-- <th>Total Harga</th> -->
                                     <th>Kep.Gudang</th>
                                     <th>Kep.Gudang Status</th>
                                     <th>Manajer</th>
@@ -85,11 +60,11 @@
                                 <tbody>
                                     <tr>
                                         <td><?= $d['nip']; ?></td>
-                                        <td style="cursor:pointer;" data-options="splash-2 splash-ef-14" data-toggle="modal" data-target="#modal-barang" class="popup-gambar" data-kode="<?= $d['kode_barang']; ?>"><?= $d['kode_barang']; ?></td>
+                                        <td><?= $d['kode_barang']; ?></td>
                                         <td><?= $d['keterangan']; ?></td>
                                         <td><?= $d['status']; ?></td>
                                         <td><?= $d['jumlah']; ?></td>
-                                        <td><?= $d['total_harga']; ?></td>
+                                        <!-- <td><?= $d['total_harga']; ?></td> -->
                                         <td><?= $d['kepala_gudang'] == '' ? 'Belum Dikonfirmasi' : $d['kepala_gudang'] ?></td>
                                         <td><?= $d['kepala_gudang_status']; ?></td>
                                         <td><?= $d['manajer'] == '' ? 'Belum Dikonfirmasi' : $d['manajer'] ?></td>
@@ -99,6 +74,7 @@
                                             <div class="text-center">
                                                 <a href="<?= base_url('pembelian/ubah/') . $d['id_pembelian'] ?>" class="btn btn-sm btn-primary btn-ef btn-ef-5 btn-ef-5b edit-button"><i class="fa fa-edit"></i> <span>Ubah</span></a>
                                                 <a href="<?= base_url('pembelian/hapus/') . $d['id_pembelian'] ?>" class="btn btn-sm btn-danger btn-ef btn-ef-5 btn-ef-5b delete-button" value="'+data+'"><i class="fa fa-trash"></i> <span>Hapus</span></a>
+                                                <button data-options="splash-2 splash-ef-14" data-toggle="modal" data-target="#modal-barang" class="btn btn-sm btn-success btn-ef btn-ef-5 btn-ef-5b popup-gambar" data-kode="<?= $d['kode_barang']; ?>"><i class="fa fa-eye"></i> <span>Detail</span></button>
                                             </div>
                                         </td>
 
@@ -230,7 +206,6 @@
                                 <img style="width: 300px;" src="<?= base_url('gambar/'); ?>${data.gambar}" alt="">
                             </div>
                         </div>
-                                <h4><strong>Rp ${harga}</strong></h4>
                             <h4><p>Stok : ${data.stok}</p></h4>
                             <h3 class="text-center">Keterangan</h3>
                             <h4 class="text-justify" style="padding:0 3rem;"><strong>${data.keterangan}</strong></h4>

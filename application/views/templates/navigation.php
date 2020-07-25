@@ -1,4 +1,4 @@
-<aside id="sidebar">
+<aside id="sidebar" style="background-color: #000000;">
 
 
 	<div id="sidebar-wrap">
@@ -14,115 +14,95 @@
 				</div>
 				<div id="sidebarNav" class="panel-collapse collapse in" role="tabpanel">
 					<div class="panel-body">
-						<ul id="navigation">
+						<ul id="navigation" style="background-color: #000000;">
 							<?php if ($this->session->userdata('id_level') == 1) : ?>
 								<li>
-									<a href="#"><i class="fa fa-caret-right"></i>Menu</a>
-									<ul>
-										<li>
-											<a href="<?= base_url('permintaan'); ?>">
-												<i class="fa fa-caret-right"></i>Permintaan
-											</a>
-										</li>
-										<li>
-											<a href="<?= base_url('laporan-permintaan'); ?>">
-												<i class="fa fa-caret-right"></i>Laporan permintaan
-											</a>
-										</li>
-									</ul>
+									<a href="<?= base_url('permintaan'); ?>">
+										<i class="fa fa-caret-right"></i>Permintaan
+									</a>
+								</li>
+								<li>
+									<a href="<?= base_url('laporan-permintaan'); ?>">
+										<i class="fa fa-caret-right"></i>Laporan permintaan
+									</a>
 								</li>
 							<?php elseif ($this->session->userdata('id_level') == 2) : ?>
 								<li>
-									<a href="#"><i class="fa fa-caret-right"></i>Menu</a>
-									<ul>
-										<li>
-											<a href="<?= base_url('barang'); ?>">
-												<i class="fa fa-caret-right"></i>Barang
-											</a>
-										</li>
-										<li>
-											<a href="<?= base_url('permintaan'); ?>">
-												<i class="fa fa-caret-right"></i>Permintaan
-											</a>
-										</li>
-										<li>
-											<a href="<?= base_url('pembelian'); ?>">
-												<i class="fa fa-caret-right"></i>Pembelian Barang
-											</a>
-										</li>
-										<li>
-											<a href="<?= base_url('rak'); ?>">
-												<i class="fa fa-caret-right"></i>Rak
-											</a>
-										</li>
-										<li>
-											<a href="<?= base_url('laporan-pembelian'); ?>">
-												<i class="fa fa-caret-right"></i>Laporan Pembelian
-											</a>
-										</li>
-										<li>
-											<a href="<?= base_url('laporan-permintaan'); ?>">
-												<i class="fa fa-caret-right"></i>Laporan permintaan
-											</a>
-										</li>
-									</ul>
+									<a href="<?= base_url('barang'); ?>">
+										<i class="fa fa-caret-right"></i>Barang
+									</a>
+								</li>
+								<li>
+									<a href="<?= base_url('permintaan'); ?>">
+										<i class="fa fa-caret-right"></i>Permintaan
+									</a>
+								</li>
+								<li>
+									<a href="<?= base_url('pembelian'); ?>">
+										<i class="fa fa-caret-right"></i>Pembelian Barang
+									</a>
+								</li>
+								<li>
+									<a href="<?= base_url('rak'); ?>">
+										<i class="fa fa-caret-right"></i>Rak
+									</a>
+								</li>
+								<li>
+									<a href="<?= base_url('laporan-pembelian'); ?>">
+										<i class="fa fa-caret-right"></i>Laporan Pembelian
+									</a>
+								</li>
+								<li>
+									<a href="<?= base_url('laporan-permintaan'); ?>">
+										<i class="fa fa-caret-right"></i>Laporan permintaan
+									</a>
 								</li>
 							<?php elseif ($this->session->userdata('id_level') == 3) : ?>
 								<li>
-									<a href="#"><i class="fa fa-caret-right"></i>Menu</a>
-									<ul>
-										<li>
-											<a href="<?= base_url('barang'); ?>">
-												<i class="fa fa-caret-right"></i>Barang
-											</a>
-										</li>
-										<li>
-											<a href="<?= base_url('permintaan'); ?>">
-												<i class="fa fa-caret-right"></i>Permintaan
-											</a>
-										</li>
-										<li>
-											<a href="<?= base_url('pembelian'); ?>">
-												<i class="fa fa-caret-right"></i>Pembelian Barang
-											</a>
-										</li>
-										<li>
-											<a href="<?= base_url('laporan-pembelian'); ?>">
-												<i class="fa fa-caret-right"></i>Laporan Pembelian
-											</a>
-										</li>
-										<li>
-											<a href="<?= base_url('laporan-permintaan'); ?>">
-												<i class="fa fa-caret-right"></i>Laporan permintaan
-											</a>
-										</li>
-									</ul>
+									<a href="<?= base_url('barang'); ?>">
+										<i class="fa fa-caret-right"></i>Barang
+									</a>
+								</li>
+								<li>
+									<a href="<?= base_url('permintaan'); ?>">
+										<i class="fa fa-caret-right"></i>Permintaan
+									</a>
+								</li>
+								<li>
+									<a href="<?= base_url('pembelian'); ?>">
+										<i class="fa fa-caret-right"></i>Pembelian Barang
+									</a>
+								</li>
+								<li>
+									<a href="<?= base_url('laporan-pembelian'); ?>">
+										<i class="fa fa-caret-right"></i>Laporan Pembelian
+									</a>
+								</li>
+								<li>
+									<a href="<?= base_url('laporan-permintaan'); ?>">
+										<i class="fa fa-caret-right"></i>Laporan permintaan
+									</a>
 								</li>
 							<?php elseif ($this->session->userdata('id_level') == 4) : ?>
 								<li>
-									<a href=""><i class="fa fa-caret-right"></i>Menu</a>
-									<ul>
-										<li>
-											<a href="<?= base_url('permintaan'); ?>">
-												<i class="fa fa-caret-right"></i>Permintaan
-											</a>
-										</li>
-										<li>
-											<a href="<?= base_url('pembelian'); ?>">
-												<i class="fa fa-caret-right"></i>Pembelian Barang
-											</a>
-										</li>
-										<li>
-											<a href="<?= base_url('laporan-pembelian'); ?>">
-												<i class="fa fa-caret-right"></i>Laporan Pembelian
-											</a>
-										</li>
-										<li>
-											<a href="<?= base_url('laporan-permintaan'); ?>">
-												<i class="fa fa-caret-right"></i>Laporan permintaan
-											</a>
-										</li>
-									</ul>
+									<a href="<?= base_url('permintaan'); ?>">
+										<i class="fa fa-caret-right"></i>Permintaan
+									</a>
+								</li>
+								<li>
+									<a href="<?= base_url('pembelian'); ?>">
+										<i class="fa fa-caret-right"></i>Pembelian Barang
+									</a>
+								</li>
+								<li>
+									<a href="<?= base_url('laporan-pembelian'); ?>">
+										<i class="fa fa-caret-right"></i>Laporan Pembelian
+									</a>
+								</li>
+								<li>
+									<a href="<?= base_url('laporan-permintaan'); ?>">
+										<i class="fa fa-caret-right"></i>Laporan permintaan
+									</a>
 								</li>
 							<?php endif; ?>
 							<li>

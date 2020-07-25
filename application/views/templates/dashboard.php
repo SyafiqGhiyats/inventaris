@@ -76,10 +76,10 @@
 
 
 		<section id="header">
-			<header class="clearfix">
+			<header class="clearfix" style="background-color: #000000;">
 
 				<!-- Branding -->
-				<div class="branding">
+				<div class="branding" style="background-color: #000000;">
 					<a class="brand" href="<?= base_url() ?>">
 						<span><strong>INVENTARIS</strong></span>
 					</a>

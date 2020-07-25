@@ -12,12 +12,15 @@ class PermintaanModel extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
-    public function get()
+    public function get($nip=null)
     {
         $this->db->select('*');
         $this->db->from('permintaan');
         $this->db->join('permintaan_detail', 'permintaan_detail.id_permintaan = permintaan.id_permintaan');
         $this->db->order_by('sort', 'ASC');
+        if($nip != null){
+            $this->db->where('permintaan.nip', $nip);
+        }
         $query = $this->db->get();
         return $query->result_array();
     }

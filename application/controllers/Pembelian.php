@@ -173,7 +173,6 @@ class Pembelian extends Render_Controller
             'jumlah' => $jumlah,
             'total_harga' => ((int) $jumlah * $barang['harga']),
             'kepala_gudang_status' => 'Pending..',
-            'kepala_gudang2_status' => 'Pending..',
             'manajer_status' => 'Pending..'
         ];
         if (empty($id)) {

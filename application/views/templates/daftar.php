@@ -80,7 +80,7 @@
 
 
 
-        <div class="page page-core page-login">
+        <div class="page page-core page-login" style="background-color: #000000;">
 
             <div class="text-center">
                 <h3 class="text-light text-white"><span class="text-lightred">ENGINEERING</span>INVENTORI</h3>

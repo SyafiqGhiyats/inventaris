@@ -13,15 +13,19 @@ class Permintaan extends Render_Controller
         $key = $this->input->post('key');
         $this->navigation = ['Dashboard'];
         $this->plugins = [];
-        $this->data['data'] = $this->model->get();
         $this->data['barang'] = $brg;
+
         if ($this->session->userdata('id_level') == 1) {
+            $this->data['data'] = $this->model->get($this->session->userdata('nip'));
             $this->content = 'permintaan-teknisi';
         } elseif ($this->session->userdata('id_level') == 2) {
+            $this->data['data'] = $this->model->get();
             $this->content = 'permintaan-petugas-gudang';
         } elseif ($this->session->userdata('id_level') == 3) {
+        $this->data['data'] = $this->model->get();
             $this->content = 'permintaan-kepala-gudang';
         } elseif ($this->session->userdata('id_level') == 4) {
+            $this->data['data'] = $this->model->get();
             $this->content = 'permintaan-manajer';
         }
         if ($key) {
@@ -100,7 +104,7 @@ class Permintaan extends Render_Controller
         if ($data['kepala_gudang_status'] != 'Pending..') {
             if ($data['manajer_status'] != 'Pending..') {
                 echo "<script>alert('Barang ini telah dikonfirmasi,tidak bisa mengkonfirmasi ulang')</script>";
-                redirect('pembelian', 'refresh');
+                redirect('permintaan', 'refresh');
             } else {
                 $query = $this->db->where('id_permintaan', $id);
                 $query = $this->db->update('permintaan', $data_permintaan);
@@ -119,7 +123,7 @@ class Permintaan extends Render_Controller
             }
         } else {
             echo "<script>alert('Harap Tunggu konfirmasi dari kepala gudang')</script>";
-            redirect('pembelian', 'refresh');
+            redirect('permintaan', 'refresh');
         }
     }
     public function reject_manajer($id)

@@ -70,12 +70,13 @@ class Barang extends Render_Controller
         $nama = $this->input->post('nama');
         $keterangan = $this->input->post('keterangan');
         $harga = $this->input->post('harga');
+        $stok_min = $this->input->post('stok_min');
         $stok = $this->input->post('stok');
         $data = [
             'nama' => $nama,
             'id_rak' => $id_rak,
             'keterangan' => $keterangan,
-            'harga' => $harga,
+            'stok_min' => $stok_min,
             'stok' => $stok
         ];
         if (empty($id)) {
