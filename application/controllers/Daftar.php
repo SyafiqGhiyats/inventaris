@@ -40,7 +40,7 @@ class Daftar extends Render_Controller
             'password' => $password,
             'nama' => $nama,
             'nomer_hp' => $nomer_hp,
-            'id_level' => 1
+            'id_level' => 2
         ];
         $query = $this->db->insert('users', $data);
         if ($query) {
