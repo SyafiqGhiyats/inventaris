@@ -69,7 +69,7 @@ class Pdf
 		$filename 		= $this->filename;
 
 		$pdf  			= $dompdf->output();
-
+		ob_end_clean();
 		$exe 			= $dompdf->stream($filename, array('Attachment' => false));
 
 		return $exe;
