@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/admin/non-angular/assets/js/vendor/animsition/css/animsition.min.css">
 
     <!-- project main css files -->
-    <link rel="stylesheet" href="<?= base_url() ?>assets/admin/non-angular/assets/css/main2.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/admin/non-angular/assets/css/main.css">
     <!--/ stylesheets -->
 
 
@@ -81,7 +81,7 @@
         <div class="page page-core page-login" style="background-color: #000000;">
 
             <div class="text-center">
-                <h3 class="text-light text-white"><span class="text-lightred">ENGINEERING</span>INVENTORY</h3>
+                <h3 class="text-light text-white">INVENTORY</h3>
             </div>
 
             <div class="container w-420 p-15 bg-white mt-40 text-center">

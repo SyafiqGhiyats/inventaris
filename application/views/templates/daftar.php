@@ -83,7 +83,7 @@
         <div class="page page-core page-login" style="background-color: #000000;">
 
             <div class="text-center">
-                <h3 class="text-light text-white"><span class="text-lightred">ENGINEERING</span>INVENTORI</h3>
+                <h3 class="text-light text-white">INVENTORI</h3>
             </div>
 
             <div class="container w-420 p-15 bg-white mt-40 text-center">
